@@ -28,11 +28,11 @@ public class TestData {
 	@SuppressWarnings("serial")
 	public List<Author> allAuthors = new ArrayList<Author>() {
 		{
-			add(new Author("Joe", "Thomas", "641-445-2123", addresses.get(0), "A happy man is he."));
-			add(new Author("Sandra", "Thomas", "641-445-2123", addresses.get(0), "A happy wife is she."));
-			add(new Author("Nirmal", "Pugh", "641-919-3223", addresses.get(1), "Thinker of thoughts."));
-			add(new Author("Andrew", "Cleveland", "976-445-2232", addresses.get(2), "Author of childrens' books."));
-			add(new Author("Sarah", "Connor", "123-422-2663", addresses.get(3), "Known for her clever style."));
+			add(new Author("Joe", "Thomas", "641-445-2123", addresses.get(0), "1","A happy man is he."));
+			add(new Author("Sandra", "Thomas", "641-445-2123", addresses.get(0), "2","A happy wife is she."));
+			add(new Author("Nirmal", "Pugh", "641-919-3223", addresses.get(1), "3","Thinker of thoughts."));
+			add(new Author("Andrew", "Cleveland", "976-445-2232", addresses.get(2), "6","Author of childrens' books."));
+			add(new Author("Sarah", "Connor", "123-422-2663", addresses.get(3),"5", "Known for her clever style."));
 		}
 	};
 	
@@ -62,12 +62,12 @@ public class TestData {
 	
 	public static void main(String[] args) {
 		TestData td = new TestData();
-		td.bookData();
+//		td.bookData();
 		td.libraryMemberData();
-		td.userData();
-		DataAccess da = new DataAccessFacade();
-		System.out.println(da.readBooksMap());
-		System.out.println(da.readUserMap());
+//		td.userData();
+//		DataAccess da = new DataAccessFacade();
+//		System.out.println(da.readBooksMap());
+//		System.out.println(da.readUserMap());
 	}
 	///create books
 	public void bookData() {

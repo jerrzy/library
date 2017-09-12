@@ -26,6 +26,12 @@ public class SystemController implements ControllerInterface {
 		currentAuth = map.get(id).getAuthorization();
 		
 	}
+
+	@Override
+	public void addMember(LibraryMember member) {
+
+	}
+
 	@Override
 	public List<String> allMemberIds() {
 		DataAccess da = new DataAccessFacade();
@@ -41,6 +47,23 @@ public class SystemController implements ControllerInterface {
 		retval.addAll(da.readBooksMap().keySet());
 		return retval;
 	}
-	
-	
+
+	@Override
+	public void AddBookCopy(String isbn) throws LibrarySystemException {
+		if(currentAuth == null || (currentAuth != Auth.ADMIN && currentAuth != Auth.BOTH)){
+			throw new LibrarySystemException("no right!");
+		}
+
+		new BookCopyService().addBookCopy(isbn);
+	}
+
+	@Override
+	public void checkoutBook(String memberId, String isbn) throws LibrarySystemException{
+		if(currentAuth == null || (currentAuth != Auth.LIBRARIAN && currentAuth != Auth.BOTH)){
+			throw new LibrarySystemException("no right!");
+		}
+		new BookCopyService().checkoutBook(memberId,isbn);
+	}
+
+
 }

@@ -8,7 +8,15 @@ import dataaccess.DataAccessFacade;
 
 public interface ControllerInterface {
 	public void login(String id, String password) throws LoginException;
+
+	void addMember(LibraryMember member);
+
 	public List<String> allMemberIds();
+
 	public List<String> allBookIds();
+
+	void AddBookCopy(String isbn) throws LibrarySystemException;
+
+    void checkoutBook(String memberId, String isbn) throws LibrarySystemException;
 	
 }
