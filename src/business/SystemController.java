@@ -292,6 +292,24 @@ public class SystemController implements ControllerInterface{
        
         AlertMaker.showSimpleAlert("Member Added", "Saved");
     }
+    
+    ///////////////////////////////////////////////////
+    /**
+     * check out
+     */
+    @FXML
+    private void handleCheckOut(ActionEvent event){
+    	AlertMaker.showSimpleAlert("Book checked out", "Saved");
+    }
+    
+    /**
+     * check in
+     * @param event
+     */
+    @FXML
+    private void handleCheckIn(ActionEvent event){
+    	AlertMaker.showSimpleAlert("Book checked in", "Saved");
+    }
     ///////////////////////////////////////////////////
 
 
