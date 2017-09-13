@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="250.0" prefWidth="404.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.SystemController">
     <stylesheets>
-        <URL value="@member_add.css" />
+        <URL value="@addmember.css" />
     </stylesheets>
    <children>
       <BorderPane layoutX="9.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
