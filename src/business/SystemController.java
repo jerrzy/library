@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import business.Book;
 import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
@@ -84,7 +82,7 @@ public class SystemController implements ControllerInterface {
 
 	void loadMain() {
 		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("../main/main.fxml"));
+			Parent parent = FXMLLoader.load(getClass().getResource("../ui/main/main.fxml"));
 			Stage stage = new Stage(StageStyle.DECORATED);
 			stage.setTitle("Library Assistant");
 			stage.setScene(new Scene(parent));

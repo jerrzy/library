@@ -1,7 +1,6 @@
 package ui.main;
 
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +16,7 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("Library Assistant Login");
+        stage.setTitle("Library System Login");
     }
 
     public static void main(String[] args) {

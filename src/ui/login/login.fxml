@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -7,14 +12,14 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane id="AnchorPane" prefHeight="254.0" prefWidth="344.0" stylesheets="@../common.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="business.SystemController">
+<AnchorPane id="AnchorPane" prefHeight="254.0" prefWidth="344.0" stylesheets="@../common.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.SystemController">
    <children>
-      <Label fx:id="titleLabel" alignment="CENTER" layoutX="14.0" layoutY="6.0" prefHeight="52.0" prefWidth="344.0" style="-fx-background-color: black; -fx-text-fill: white;" text="Library Assistant Login" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="titleLabel" alignment="CENTER" layoutX="14.0" layoutY="6.0" prefHeight="52.0" prefWidth="344.0" style="-fx-background-color: black;" text="Library System Login" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="username"  layoutX="38.0" layoutY="81.0" prefHeight="24.0" prefWidth="272.0" promptText="Username">
+      <TextField fx:id="username" layoutX="38.0" layoutY="81.0" prefHeight="24.0" prefWidth="272.0" promptText="Username">
          <font>
             <Font size="16.0" />
          </font>

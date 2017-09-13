@@ -34,7 +34,7 @@ public class LoginController implements Initializable {
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
 
-        titleLabel.setText("Library Assistant Login");
+        titleLabel.setText("Library System Login");
         titleLabel.setStyle("-fx-background-color:black;-fx-text-fikll:white");
 
         String uname = username.getText();
@@ -46,7 +46,6 @@ public class LoginController implements Initializable {
             loadMain();
         } else {
             titleLabel.setText("Invalid Credentails");
-            titleLabel.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
         }
     }
 
@@ -63,7 +62,7 @@ public class LoginController implements Initializable {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource("../main/main.fxml"));
             Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Library Assistant");
+            stage.setTitle("Library System");
             stage.setScene(new Scene(parent));
             stage.show();
         } catch (IOException ex) {
