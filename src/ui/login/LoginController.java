@@ -33,6 +33,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
+
         titleLabel.setText("Library Assistant Login");
         titleLabel.setStyle("-fx-background-color:black;-fx-text-fikll:white");
 

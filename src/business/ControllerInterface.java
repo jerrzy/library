@@ -5,8 +5,9 @@ import java.util.List;
 import business.Book;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
+import javafx.fxml.Initializable;
 
-public interface ControllerInterface {
+public interface ControllerInterface extends Initializable{
 	public void login(String id, String password) throws LoginException;
 
 	void addMember(LibraryMember member);
