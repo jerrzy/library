@@ -125,7 +125,7 @@ public class SystemController implements ControllerInterface{
   
     @FXML
     private void loadAddMember(ActionEvent event) {
-    	loadWindow("/ui/addmembe.fxml", "Add New Member");
+    	loadWindow("/ui/addmember.fxml", "Add New Member");
     }
 
     @FXML
