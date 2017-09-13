@@ -26,129 +26,112 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ui.main.MainController;
 
-public class SystemController implements ControllerInterface {
-	public static Auth currentAuth = null;
+public class SystemController implements ControllerInterface{
+    public static Auth currentAuth = null;
 
-	@FXML
-	private TextField username;
-	@FXML
-	private PasswordField password;
-	@FXML
-	private Label titleLabel;
+    @FXML
+    private TextField username;
+    @FXML
+    private PasswordField password;
+    @FXML
+    private Label titleLabel;
 
-	@FXML
-	private void handleLoginButtonAction(ActionEvent event) {
+    @FXML
+    private void handleLoginButtonAction(ActionEvent event) {
 
-		titleLabel.setText("Library Assistant Login");
-		titleLabel.setStyle("-fx-background-color:black;-fx-text-fikll:white");
+        titleLabel.setText("Library Assistant Login");
+        titleLabel.setStyle("-fx-background-color:black;-fx-text-fikll:white");
 
-		String id = username.getText();
-		String pword = password.getText();
+        String id = username.getText();
+        String pword = password.getText();
 
-		DataAccess da = new DataAccessFacade();
-		HashMap<String, User> map = da.readUserMap();
-		if(!map.containsKey(id)) {
-//			throw new LoginException("ID " + id + " not found");
-			titleLabel.setText("ID " + id + " not found");
-			titleLabel.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
-			return;
-		}
-		String passwordFound = map.get(id).getPassword();
-		if(!passwordFound.equals(pword)) {
-//			throw new LoginException("Password incorrect");
-			titleLabel.setText("Password incorrect");
-			titleLabel.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
-			return;
-		}
-		currentAuth = map.get(id).getAuthorization();
+        try {
+            login(id, pword);
+        } catch (Exception e) {
+            titleLabel.setText(e.getMessage());
+            titleLabel.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
+            e.printStackTrace();
+        }
+        closeStage();
+        loadMain();
+    }
 
-		closeStage();
-		loadMain();
-//		if (uname.equals("admin") && pword.equals("admin")) {
-//			closeStage();
-//			loadMain();
-//		} else {
-//			titleLabel.setText("Invalid Credentails");
-//			titleLabel.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
-//		}
-	}
+    @FXML
+    private void handleCancelButtonAction(ActionEvent event) {
+        System.exit(0);
+    }
 
-	@FXML
-	private void handleCancelButtonAction(ActionEvent event) {
-		System.exit(0);
-	}
+    private void closeStage() {
+        ((Stage)username.getScene().getWindow()).close();
+    }
 
-	private void closeStage() {
-		((Stage) username.getScene().getWindow()).close();
-	}
+    void loadMain() {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("../ui/main/main.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Library Assistant");
+            stage.setScene(new Scene(parent));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
-	void loadMain() {
-		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("../ui/main/main.fxml"));
-			Stage stage = new Stage(StageStyle.DECORATED);
-			stage.setTitle("Library Assistant");
-			stage.setScene(new Scene(parent));
-			stage.show();
-		} catch (IOException ex) {
-			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-	
-	public void login(String id, String password) throws LoginException {
-		DataAccess da = new DataAccessFacade();
-		HashMap<String, User> map = da.readUserMap();
-		if(!map.containsKey(id)) {
-			throw new LoginException("ID " + id + " not found");
-		}
-		String passwordFound = map.get(id).getPassword();
-		if(!passwordFound.equals(password)) {
-			throw new LoginException("Password incorrect");
-		}
-		currentAuth = map.get(id).getAuthorization();
-		
-	}
+    public void login(String id, String password) throws LoginException {
+        DataAccess da = new DataAccessFacade();
+        HashMap<String, User> map = da.readUserMap();
+        if (!map.containsKey(id)) {
+            throw new LoginException("ID " + id + " not found");
+        }
+        String passwordFound = map.get(id).getPassword();
+        if (!passwordFound.equals(password)) {
+            throw new LoginException("Password incorrect");
+        }
+        currentAuth = map.get(id).getAuthorization();
 
-	@Override
-	public void addMember(LibraryMember member) {
+    }
 
-	}
+    @Override
+    public void addMember(LibraryMember member) {
 
-	@Override
-	public List<String> allMemberIds() {
-		DataAccess da = new DataAccessFacade();
-		List<String> retval = new ArrayList<>();
-		retval.addAll(da.readMemberMap().keySet());
-		return retval;
-	}
-	
-	@Override
-	public List<String> allBookIds() {
-		DataAccess da = new DataAccessFacade();
-		List<String> retval = new ArrayList<>();
-		retval.addAll(da.readBooksMap().keySet());
-		return retval;
-	}
+    }
 
-	@Override
-	public void AddBookCopy(String isbn) throws LibrarySystemException {
-		if(currentAuth == null || (currentAuth != Auth.ADMIN && currentAuth != Auth.BOTH)){
-			throw new LibrarySystemException("no right!");
-		}
+    @Override
+    public List<String> allMemberIds() {
+        DataAccess da = new DataAccessFacade();
+        List<String> retval = new ArrayList<>();
+        retval.addAll(da.readMemberMap().keySet());
+        return retval;
+    }
 
-		new BookCopyService().addBookCopy(isbn);
-	}
+    @Override
+    public List<String> allBookIds() {
+        DataAccess da = new DataAccessFacade();
+        List<String> retval = new ArrayList<>();
+        retval.addAll(da.readBooksMap().keySet());
+        return retval;
+    }
 
-	@Override
-	public void checkoutBook(String memberId, String isbn) throws LibrarySystemException{
-		if(currentAuth == null || (currentAuth != Auth.LIBRARIAN && currentAuth != Auth.BOTH)){
-			throw new LibrarySystemException("no right!");
-		}
-		new BookCopyService().checkoutBook(memberId,isbn);
-	}
+    @Override
+    public void AddBookCopy(String isbn) throws LibrarySystemException {
+        if (currentAuth == null || (currentAuth != Auth.ADMIN && currentAuth != Auth.BOTH)) {
+            throw new LibrarySystemException("no right!");
+        }
+
+        new BookCopyService().addBookCopy(isbn);
+    }
+
+    @Override
+    public void checkoutBook(String memberId, String isbn) throws LibrarySystemException {
+        if (currentAuth == null || (currentAuth != Auth.LIBRARIAN && currentAuth != Auth.BOTH)) {
+            throw new LibrarySystemException("no right!");
+        }
+        new BookCopyService().checkoutBook(memberId, isbn);
+    }
 
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-	}
+    }
 }
