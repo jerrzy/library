@@ -90,13 +90,19 @@ public class SystemController implements ControllerInterface{
      * add member UI
      */
     @FXML
-    private TextField name_AddMember;
+    private TextField firstName_AddMember;
     @FXML
-    private TextField id_AddMember;
+    private TextField lastName_AddMember;
     @FXML
-    private TextField mobile_AddMember;
+    private TextField telephone_AddMember;
     @FXML
-    private TextField email_AddMember;
+    private TextField street_AddMember;
+    @FXML
+    private TextField city_AddMember;
+    @FXML
+    private TextField state_AddMember;
+    @FXML
+    private TextField zip_AddMember;
     @FXML
     private Button saveButton_AddMember;
     @FXML
@@ -229,12 +235,16 @@ public class SystemController implements ControllerInterface{
 
     @FXML
     private void addMember(ActionEvent event) {
-        String mName = name_AddMember.getText();
-        String mID = id_AddMember.getText();
-        String mMobile = mobile_AddMember.getText();
-        String mEmail = email_AddMember.getText();
-
-        Boolean flag = mName.isEmpty() || mID.isEmpty() || mMobile.isEmpty() || mEmail.isEmpty();
+        String firstName = firstName_AddMember.getText();
+        String lastName = lastName_AddMember.getText();
+        String telephone = telephone_AddMember.getText();
+        String street = street_AddMember.getText();
+        String city = city_AddMember.getText();
+        String state = state_AddMember.getText();
+        String zip = zip_AddMember.getText();
+        
+        Boolean flag = firstName.isEmpty() || lastName.isEmpty() || telephone.isEmpty() ||
+        		street.isEmpty() || city.isEmpty() || state.isEmpty() || zip.isEmpty();
         if (flag) {
             AlertMaker.showErrorMessage("Cant add member", "Please Enter in all fields");
             return;

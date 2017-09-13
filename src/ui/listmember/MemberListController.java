@@ -1,15 +1,9 @@
 package ui.listmember;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import Domain.Member;
-import dao.DataAccess;
-import javafx.beans.property.SimpleStringProperty;
+import business.LibraryMember;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,18 +14,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MemberListController implements Initializable {
 
-    ObservableList<Member> list = FXCollections.observableArrayList();
+    ObservableList<LibraryMember> list = FXCollections.observableArrayList();
 
     @FXML
-    private TableView<Member> tableView;
+    private TableView<LibraryMember> tableView;
     @FXML
-    private TableColumn<Member, String> nameCol;
+    private TableColumn<LibraryMember, String> nameCol;
     @FXML
-    private TableColumn<Member, String> idCol;
+    private TableColumn<LibraryMember, String> idCol;
     @FXML
-    private TableColumn<Member, String> mobileCol;
+    private TableColumn<LibraryMember, String> mobileCol;
     @FXML
-    private TableColumn<Member, String> emailCol;
+    private TableColumn<LibraryMember, String> emailCol;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,9 +42,7 @@ public class MemberListController implements Initializable {
     
     private void loadData() {
         	
-    	for(Member member : DataAccess.instance().getMembers()){
-    		list.add(member.clone());
-    	} 
+    	// todo.. add members into list
         tableView.getItems().setAll(list);
     }
 }
