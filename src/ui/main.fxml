@@ -67,7 +67,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="223.0" prefHeight="150.0" prefWidth="154.0" text="logout">
+                  <Button contentDisplay="TOP" layoutX="10.0" layoutY="223.0" onAction="#handleLogoutButtonAction" prefHeight="150.0" prefWidth="154.0" text="logout">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
