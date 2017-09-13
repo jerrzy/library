@@ -46,7 +46,7 @@ public class MemberListController implements Initializable {
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
     
-    private void loadData() {
+    private void loadData() { //
         	
     	// todo.. add members into list
     	DataAccess da = new DataAccessFacade();
