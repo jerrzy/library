@@ -353,11 +353,14 @@ public class SystemController implements ControllerInterface{
             AlertMaker.showErrorMessage("Cant add member", "Please Enter in all fields");
             return;
         }
-        String b = UUID.randomUUID().toString();
+        DataAccessFacade c = new DataAccessFacade();
+
+//        String b = UUID.randomUUID().toString();
+        String b = c.getUniqueId();
+
         Address add = new Address(street, city, state, zip);
         LibraryMember a = new LibraryMember(b, firstName, lastName, telephone, add);
 
-        DataAccessFacade c = new DataAccessFacade();
         c.saveNewMember(a);
 
         AlertMaker.showSimpleAlert("Member Added", "Saved");

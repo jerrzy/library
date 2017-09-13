@@ -67,13 +67,20 @@ public class TestData {
 	
 	public static void main(String[] args) {
 		TestData td = new TestData();
-		td.bookData();
-		td.libraryMemberData();
-		td.userData();
-		DataAccess da = new DataAccessFacade();
-		System.out.println(da.readBooksMap());
-		System.out.println(da.readUserMap());
+//		td.bookData();
+//		td.libraryMemberData();
+//		td.userData();
+//		DataAccess da = new DataAccessFacade();
+//		System.out.println(da.readBooksMap());
+//		System.out.println(da.readUserMap());
+
+        td.initUniqueId();
 	}
+
+	public void initUniqueId(){
+        DataAccessFacade.loadUniqueId(5000);
+    }
+
 	///create books
 	public void bookData() {
 		allBooks.get(0).addCopy();
