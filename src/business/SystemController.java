@@ -51,16 +51,19 @@ public class SystemController implements ControllerInterface {
 //			throw new LoginException("ID " + id + " not found");
 			titleLabel.setText("ID " + id + " not found");
 			titleLabel.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
+			return;
 		}
 		String passwordFound = map.get(id).getPassword();
 		if(!passwordFound.equals(pword)) {
 //			throw new LoginException("Password incorrect");
 			titleLabel.setText("Password incorrect");
 			titleLabel.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
+			return;
 		}
 		currentAuth = map.get(id).getAuthorization();
 
-
+		closeStage();
+		loadMain();
 //		if (uname.equals("admin") && pword.equals("admin")) {
 //			closeStage();
 //			loadMain();
