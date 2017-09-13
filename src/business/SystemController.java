@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
@@ -29,7 +30,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sun.security.x509.UniqueIdentity;
 import ui.AlertMaker;
 
 public class SystemController implements ControllerInterface{
@@ -255,6 +255,9 @@ public class SystemController implements ControllerInterface{
        Address add=new Address(street, city, state, zip);
        LibraryMember a=new LibraryMember(b, firstName, lastName, telephone, add);
        
+       DataAccessFacade c=new DataAccessFacade();
+       c.saveNewMember(a);
+       
         AlertMaker.showSimpleAlert("Member Added", "Saved");
     }
     ///////////////////////////////////////////////////
@@ -277,6 +280,7 @@ public class SystemController implements ControllerInterface{
 
     @Override
     public void addMember(LibraryMember member) {
+    	
 
     }
 
