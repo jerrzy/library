@@ -1,8 +1,13 @@
 package dataaccess;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import business.*;
@@ -62,12 +67,12 @@ public class TestData {
 	
 	public static void main(String[] args) {
 		TestData td = new TestData();
-//		td.bookData();
+		td.bookData();
 		td.libraryMemberData();
-//		td.userData();
-//		DataAccess da = new DataAccessFacade();
-//		System.out.println(da.readBooksMap());
-//		System.out.println(da.readUserMap());
+		td.userData();
+		DataAccess da = new DataAccessFacade();
+		System.out.println(da.readBooksMap());
+		System.out.println(da.readUserMap());
 	}
 	///create books
 	public void bookData() {
@@ -90,6 +95,16 @@ public class TestData {
 	
 	public void libraryMemberData() {
 		LibraryMember libraryMember = new LibraryMember("1001", "Andy", "Rogers", "641-223-2211", addresses.get(4));
+
+        Book book = allBooks.get(0);
+        BookCopy bookCopy = book.getNextAvailableCopy();
+        bookCopy.changeAvailability();
+        LocalDate dateOfCheckout = LocalDate.now();
+
+        LocalDate dueDate = dateOfCheckout.plus(book.getMaxCheckoutLength(), ChronoUnit.DAYS);
+
+        libraryMember.getCheckoutRecord().addCheckoutRecordEntry(bookCopy,dateOfCheckout,dueDate);
+
 		members.add(libraryMember);
 		libraryMember = new LibraryMember("1002", "Drew", "Stevens", "702-998-2414", addresses.get(5));
 		members.add(libraryMember);

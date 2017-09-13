@@ -68,7 +68,7 @@ public class MainController implements Initializable {
 //    private void loadLoginView(ActionEvent event){
 //    	loadWindow("/login.fxml", "login");
 //    }
-//    
+//
 //    @FXML
 //    private void loadAddMember(ActionEvent event) {
 //        loadWindow("/addmember/member_add.fxml", "Add New Member");
@@ -139,7 +139,7 @@ public class MainController implements Initializable {
 //            memberMobile.setText(member.mobile);
 //        } else {
 //        	memberName.setText("No Such Member Available");
-//        }    
+//        }
 //    }
 //
 //    @FXML
@@ -154,7 +154,7 @@ public class MainController implements Initializable {
 //
 //        Optional<ButtonType> response = alert.showAndWait();
 //        if (response.get() == ButtonType.OK) {
-//        	
+//
 //            if (DataAccess.instance().issue(bookID, memberID)) {
 //                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
 //                alert1.setTitle("Success");
@@ -184,11 +184,11 @@ public class MainController implements Initializable {
 //        isReadyForSubmission = false;
 //
 //        String id = bookID.getText();
-//        
+//
 //        RecordEntry record = DataAccess.instance().getIssueRecord(id);
 //        Book book = DataAccess.instance().loadBook(id);
 //        Member member = DataAccess.instance().loadMember(record.menId);
-//        
+//
 //        String mIssueTime = record.date;
 //        int mRenewCount = record.reNewCount;
 //
@@ -196,7 +196,7 @@ public class MainController implements Initializable {
 //        issueData.add("Renew Count :" + mRenewCount);
 //
 //        issueData.add("Book Information:-");
-//        
+//
 //        issueData.add("\tBook Name :" + book.name);
 //        issueData.add("\tBook ID :" + book.id);
 //        issueData.add("\tBook Author :" + book.author);
@@ -230,15 +230,15 @@ public class MainController implements Initializable {
 //        Optional<ButtonType> response = alert.showAndWait();
 //        if (response.get() == ButtonType.OK) {
 //            String id = bookID.getText();
-//            
+//
 //            DataAccess.instance().returnBook(id);
-//            
+//
 //            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
 //            alert1.setTitle("Success");
 //            alert1.setHeaderText(null);
 //            alert1.setContentText("Book Has Been Submitted");
 //            alert1.showAndWait();
-//            
+//
 //        } else {
 //            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
 //            alert1.setTitle("Cancelled");
@@ -312,7 +312,7 @@ public class MainController implements Initializable {
 //
 //    private void handleMenuViewMember(ActionEvent event) {
 //        loadWindow("ui/listmember/member_list.fxml", "Member List");
-//    }    
+//    }
 //
 //    @FXML
 //    private void handleMenuFullScreen(ActionEvent event) {
