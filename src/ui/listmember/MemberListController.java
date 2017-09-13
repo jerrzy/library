@@ -1,9 +1,14 @@
 package ui.listmember;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
+import business.Book;
 import business.LibraryMember;
+import dataaccess.DataAccess;
+import dataaccess.DataAccessFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,6 +33,7 @@ public class MemberListController implements Initializable {
     private TableColumn<LibraryMember, String> emailCol;
 
     @Override
+    
     public void initialize(URL url, ResourceBundle rb) {
         initCol();
         loadData();
@@ -40,9 +46,16 @@ public class MemberListController implements Initializable {
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
     
-    private void loadData() {
+    private void loadData() { //
         	
     	// todo.. add members into list
+    	DataAccess da = new DataAccessFacade();
+        HashMap<String, LibraryMember> libraryMemberMap = da.readMemberMap();
+        int i = 0;
+        for (Map.Entry<String, LibraryMember> e : libraryMemberMap.entrySet()) {
+            list.add(i++, e.getValue());
+        }
+    
         tableView.getItems().setAll(list);
     }
 }

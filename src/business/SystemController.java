@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
@@ -143,7 +145,7 @@ public class SystemController implements ControllerInterface{
 
     @FXML
     private void loadBookTable(ActionEvent event) {
-    	loadWindow("/listbook/book_list.fxml", "Book List");
+    	loadWindow("../ui/listbook/book_list.fxml", "Book List");
     }
 
     private void closeMainWindow(){
@@ -260,6 +262,13 @@ public class SystemController implements ControllerInterface{
             AlertMaker.showErrorMessage("Cant add member", "Please Enter in all fields");
             return;
         }
+       String b= UUID.randomUUID().toString();
+       Address add=new Address(street, city, state, zip);
+       LibraryMember a=new LibraryMember(b, firstName, lastName, telephone, add);
+       
+       DataAccessFacade c=new DataAccessFacade();
+       c.saveNewMember(a);
+       
         AlertMaker.showSimpleAlert("Member Added", "Saved");
     }
     ///////////////////////////////////////////////////
@@ -280,6 +289,7 @@ public class SystemController implements ControllerInterface{
 
     @Override
     public void addMember(LibraryMember member) {
+    	
 
     }
 
