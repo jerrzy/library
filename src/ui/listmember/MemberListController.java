@@ -1,9 +1,9 @@
 package ui.listmember;
 
-import Domain.Member;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import business.LibraryMember;
-import dataaccess.DataAccess;
-import dataaccess.DataAccessFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,24 +12,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.net.URL;
-import java.util.HashMap;
-import java.util.ResourceBundle;
-
 public class MemberListController implements Initializable {
 
-    ObservableList<Member> list = FXCollections.observableArrayList();
+    ObservableList<LibraryMember> list = FXCollections.observableArrayList();
 
     @FXML
-    private TableView<Member> tableView;
+    private TableView<LibraryMember> tableView;
     @FXML
-    private TableColumn<Member, String> nameCol;
+    private TableColumn<LibraryMember, String> nameCol;
     @FXML
-    private TableColumn<Member, String> idCol;
+    private TableColumn<LibraryMember, String> idCol;
     @FXML
-    private TableColumn<Member, String> mobileCol;
+    private TableColumn<LibraryMember, String> mobileCol;
     @FXML
-    private TableColumn<Member, String> emailCol;
+    private TableColumn<LibraryMember, String> emailCol;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -45,13 +41,8 @@ public class MemberListController implements Initializable {
     }
     
     private void loadData() {
-        DataAccess da = new DataAccessFacade();
-
-        HashMap<String, LibraryMember> memberHashMap = da.readMemberMap();
         	
-//    	for(Member member : DataAccess.instance().getMembers()){
-//    		list.add(member.clone());
-//    	}
-//        tableView.getItems().setAll(list);
+    	// todo.. add members into list
+        tableView.getItems().setAll(list);
     }
 }
