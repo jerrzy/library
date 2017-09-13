@@ -3,8 +3,7 @@ package ui.listbook;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import Domain.Book;
-import dao.DataAccess;
+import business.Book;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -48,10 +47,7 @@ public class BookListController implements Initializable {
     }
 
     private void loadData() {
-    	
-    	for(Book book : DataAccess.instance().getBooks()){
-    		list.add(book.clone());
-    	}
+    	// todo.. add books into list
         
         tableView.getItems().setAll(list);
         
