@@ -22,7 +22,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import ui.main.MainController;
+import ui.MainController;
 
 public class SystemController implements ControllerInterface{
     public static Auth currentAuth = null;
@@ -74,19 +74,6 @@ public class SystemController implements ControllerInterface{
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-<<<<<<< HEAD
-	void loadMain() {
-		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("../ui/main/main.fxml"));
-			Stage stage = new Stage(StageStyle.DECORATED);
-			stage.setTitle("Library Assistant");
-			stage.setScene(new Scene(parent));
-			stage.show();
-		} catch (IOException ex) {
-			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
 	
 	public void login(String id, String password) throws LoginException {
 		DataAccess da = new DataAccessFacade();
@@ -100,21 +87,6 @@ public class SystemController implements ControllerInterface{
 		}
 		currentAuth = map.get(id).getAuthorization();		
 	}
-=======
-    public void login(String id, String password) throws LoginException {
-        DataAccess da = new DataAccessFacade();
-        HashMap<String, User> map = da.readUserMap();
-        if (!map.containsKey(id)) {
-            throw new LoginException("ID " + id + " not found");
-        }
-        String passwordFound = map.get(id).getPassword();
-        if (!passwordFound.equals(password)) {
-            throw new LoginException("Password incorrect");
-        }
-        currentAuth = map.get(id).getAuthorization();
->>>>>>> branch 'master' of https://github.com/jerrzy/library
-
-    }
 
     @Override
     public void addMember(LibraryMember member) {
