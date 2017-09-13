@@ -45,30 +45,30 @@ public class SystemController implements ControllerInterface{
     private HBox book_info;
     @FXML
     private HBox member_info;
-	@FXML
-	private TextField bookIDInput;
-	@FXML
-	private Text bookName;
-	@FXML
-	private Text bookAuthor;
-	@FXML
-	private Text bookStatus;
-	@FXML
-	private TextField memberIDInput;
-	@FXML
-	private Text memberName;
-	@FXML
-	private Text memberMobile;
-	@FXML
-	private ImageView issueButton;
-	@FXML
-	private TextField bookID;
-    
+    @FXML
+    private TextField bookIDInput;
+    @FXML
+    private Text bookName;
+    @FXML
+    private Text bookAuthor;
+    @FXML
+    private Text bookStatus;
+    @FXML
+    private TextField memberIDInput;
+    @FXML
+    private Text memberName;
+    @FXML
+    private Text memberMobile;
+    @FXML
+    private ImageView issueButton;
+    @FXML
+    private TextField bookID;
+
     /**
      * login UI
      */
-	@FXML
-	private AnchorPane anchorPane_login;
+    @FXML
+    private AnchorPane anchorPane_login;
     @FXML
     private TextField username_login;
     @FXML
@@ -93,6 +93,15 @@ public class SystemController implements ControllerInterface{
     private Button cancelButton;
     @FXML
     private AnchorPane rootPane_AddBook;
+
+    /**
+     * add book copy UI
+     */
+    @FXML
+    private TextField isbn;
+    @FXML
+    private AnchorPane rootPane_AddBookCopy;
+
     /**
      * add member UI
      */
@@ -114,80 +123,87 @@ public class SystemController implements ControllerInterface{
     private Button saveButton_AddMember;
     @FXML
     private Button cancelButton_AddMember;
-    
+
     //////////////////////////////////////////////////////
+
     /**
      * load window
-     * @param event
      */
     //////////////////////////////////////////////////////
     private void loadMain() {
-    	loadWindow("/ui/main.fxml", "Library System");
+        loadWindow("/ui/main.fxml", "Library System");
     }
-    
-    private void loadLoginWindow(){
-    	loadWindow("/ui/login.fxml", "Library System");
+
+    private void loadLoginWindow() {
+        loadWindow("/ui/login.fxml", "Library System");
     }
-    
+
     @FXML
-    private void loadLoginView(ActionEvent event){
-    	loadWindow("/ui/login.fxml", "login");
+    private void loadLoginView(ActionEvent event) {
+        loadWindow("/ui/login.fxml", "login");
     }
-  
+
     @FXML
     private void loadAddMember(ActionEvent event) {
-    	loadWindow("/ui/addmember.fxml", "Add New Member");
+        loadWindow("/ui/addmember.fxml", "Add New Member");
     }
 
     @FXML
     private void loadAddBook(ActionEvent event) {
-    	loadWindow("/ui/addbook.fxml", "Add New Book");
+        loadWindow("/ui/addbook.fxml", "Add New Book");
+    }
+
+    @FXML
+    private void loadAddBookCopy(ActionEvent event) {
+        loadWindow("/ui/addbookCopy.fxml", "Add New Book Copy");
     }
 
     @FXML
     private void loadMemberTable(ActionEvent event) {
-    	loadWindow("/ui/listmember/member_list.fxml", "Member List");
+        loadWindow("/ui/listmember/member_list.fxml", "Member List");
     }
 
     @FXML
     private void loadBookTable(ActionEvent event) {
-    	loadWindow("../ui/listbook/book_list.fxml", "Book List");
+        loadWindow("../ui/listbook/book_list.fxml", "Book List");
     }
 
-    private void closeMainWindow(){
-    	if(mainRootPane != null){
-    		((Stage)mainRootPane.getScene().getWindow()).close();	
-    	}
+    private void closeMainWindow() {
+        if (mainRootPane != null) {
+            ((Stage)mainRootPane.getScene().getWindow()).close();
+        }
     }
-    
-    private void closeLoginWindow(){
-    	if(anchorPane_login != null){
-    		((Stage)anchorPane_login.getScene().getWindow()).close();	
-    	}
+
+    private void closeLoginWindow() {
+        if (anchorPane_login != null) {
+            ((Stage)anchorPane_login.getScene().getWindow()).close();
+        }
     }
-    
+
     void loadWindow(String loc, String title) {
-    	try {
-    		Parent parent = FXMLLoader.load(getClass().getResource(loc));
-    		Stage stage = new Stage(StageStyle.DECORATED);
-    		stage.setTitle(title);
-    		stage.setScene(new Scene(parent));
-    		stage.show();
-    	} catch (IOException ex) {
-    		Logger.getLogger(SystemController.class.getName()).log(Level.SEVERE, null, ex);
-    	}
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource(loc));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle(title);
+            stage.setScene(new Scene(parent));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(SystemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     /////////////////////////////////////////////////////////////////
+
     /**
      * handle login
+     *
      * @param event
      */
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
 
-    	titleLabel_login.setText("Library System Login");
-    	titleLabel_login.setStyle("-fx-background-color:black;-fx-text-fikll:white");
+        titleLabel_login.setText("Library System Login");
+        titleLabel_login.setStyle("-fx-background-color:black;-fx-text-fikll:white");
 
         String id = username_login.getText();
         String pword = password_login.getText();
@@ -195,27 +211,28 @@ public class SystemController implements ControllerInterface{
         try {
             login(id, pword);
         } catch (Exception e) {
-        	titleLabel_login.setText(e.getMessage());
-        	titleLabel_login.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
+            titleLabel_login.setText(e.getMessage());
+            titleLabel_login.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
             e.printStackTrace();
         }
         closeLoginWindow();
         loadMain();
     }
-    
+
     @FXML
     private void handleLogoutButtonAction(ActionEvent event) {
 
-//    	titleLabel_login.setText("Library System Login");
-//    	titleLabel_login.setStyle("-fx-background-color:black;-fx-text-fikll:white");
-    	logout();
-    	
-    	closeMainWindow();
-    	loadLoginWindow();
+        //    	titleLabel_login.setText("Library System Login");
+        //    	titleLabel_login.setStyle("-fx-background-color:black;-fx-text-fikll:white");
+        logout();
+
+        closeMainWindow();
+        loadLoginWindow();
     }
 
     /**
      * handle login cancel
+     *
      * @param event
      */
     @FXML
@@ -225,11 +242,12 @@ public class SystemController implements ControllerInterface{
 
     /**
      * handle addBook button
+     *
      * @param event
      */
     @FXML
     private void addBook(ActionEvent event) {
-    	
+
         String bookID = id.getText();
         String bookAuthor = author.getText();
         String bookName = title.getText();
@@ -250,16 +268,44 @@ public class SystemController implements ControllerInterface{
         alert.showAndWait();
     }
 
+    @FXML
+    private void addBookCopy(ActionEvent event) {
+
+        String isbnStr = isbn.getText();
+        try {
+            addBookCopy(isbnStr);
+        } catch (LibrarySystemException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            e.printStackTrace();
+            return;
+        }
+        // todo.. addBookCopy logical code
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Success");
+        alert.showAndWait();
+    }
+
     /**
      * handle addBook cancel
+     *
      * @param event
      */
     @FXML
     private void cancel(ActionEvent event) {
-        Stage stage = (Stage) rootPane_AddBook.getScene().getWindow();
+        Stage stage = (Stage)rootPane_AddBook.getScene().getWindow();
         stage.close();
     }
-    
+
+    @FXML
+    private void cancelAddBookCopy(ActionEvent event) {
+        Stage stage = (Stage)rootPane_AddBookCopy.getScene().getWindow();
+        stage.close();
+    }
+
     /**
      * handle add member
      */
@@ -276,20 +322,19 @@ public class SystemController implements ControllerInterface{
         String city = city_AddMember.getText();
         String state = state_AddMember.getText();
         String zip = zip_AddMember.getText();
-        
-        Boolean flag = firstName.isEmpty() || lastName.isEmpty() || telephone.isEmpty() ||
-        		street.isEmpty() || city.isEmpty() || state.isEmpty() || zip.isEmpty();
+
+        Boolean flag = firstName.isEmpty() || lastName.isEmpty() || telephone.isEmpty() || street.isEmpty() || city.isEmpty() || state.isEmpty() || zip.isEmpty();
         if (flag) {
             AlertMaker.showErrorMessage("Cant add member", "Please Enter in all fields");
             return;
         }
-       String b= UUID.randomUUID().toString();
-       Address add=new Address(street, city, state, zip);
-       LibraryMember a=new LibraryMember(b, firstName, lastName, telephone, add);
-       
-       DataAccessFacade c=new DataAccessFacade();
-       c.saveNewMember(a);
-       
+        String b = UUID.randomUUID().toString();
+        Address add = new Address(street, city, state, zip);
+        LibraryMember a = new LibraryMember(b, firstName, lastName, telephone, add);
+
+        DataAccessFacade c = new DataAccessFacade();
+        c.saveNewMember(a);
+
         AlertMaker.showSimpleAlert("Member Added", "Saved");
     }
     
@@ -313,27 +358,21 @@ public class SystemController implements ControllerInterface{
     ///////////////////////////////////////////////////
 
 
-	public void login(String id, String password) throws LoginException {
-		DataAccess da = new DataAccessFacade();
-		HashMap<String, User> map = da.readUserMap();
-		if(!map.containsKey(id)) {
-			throw new LoginException("ID " + id + " not found");
-		}
-		String passwordFound = map.get(id).getPassword();
-		if(!passwordFound.equals(password)) {
-			throw new LoginException("Password incorrect");
-		}
-		currentAuth = map.get(id).getAuthorization();
-	}
+    public void login(String id, String password) throws LoginException {
+        DataAccess da = new DataAccessFacade();
+        HashMap<String, User> map = da.readUserMap();
+        if (!map.containsKey(id)) {
+            throw new LoginException("ID " + id + " not found");
+        }
+        String passwordFound = map.get(id).getPassword();
+        if (!passwordFound.equals(password)) {
+            throw new LoginException("Password incorrect");
+        }
+        currentAuth = map.get(id).getAuthorization();
+    }
 
-	private void logout(){
-		currentAuth = null;
-	}
-	
-    @Override
-    public void addMember(LibraryMember member) {
-    	
-
+    private void logout() {
+        currentAuth = null;
     }
 
     @Override
@@ -353,10 +392,11 @@ public class SystemController implements ControllerInterface{
     }
 
     @Override
-    public void AddBookCopy(String isbn) throws LibrarySystemException {
-        if (currentAuth == null || (currentAuth != Auth.ADMIN && currentAuth != Auth.BOTH)) {
-            throw new LibrarySystemException("no right!");
-        }
+    public void addBookCopy(String isbn) throws LibrarySystemException {
+        //TODO check the auth
+//        if (currentAuth == null || (currentAuth != Auth.ADMIN && currentAuth != Auth.BOTH)) {
+//            throw new LibrarySystemException("no right!");
+//        }
 
         new BookCopyService().addBookCopy(isbn);
     }
