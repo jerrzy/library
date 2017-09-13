@@ -222,6 +222,7 @@ public class SystemController implements ControllerInterface{
             titleLabel_login.setText(e.getMessage());
             titleLabel_login.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
             e.printStackTrace();
+            return;
         }
         closeLoginWindow();
         loadMain();
