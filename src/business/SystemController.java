@@ -220,21 +220,24 @@ public class SystemController implements ControllerInterface{
     	if(currentAuth != null){
     		List<String> functionList = new ArrayList<>();
     		if(currentAuth == Auth.ADMIN){
-//    			functionList.add("#addMemberButton");
     			functionList.add("#checkout");
     			functionList.add("#checkin");
     			
     			for(String function : functionList){
-    				scene.lookup(function).setDisable(true);
+    				Node node = scene.lookup(function);
+    				if(node != null){
+    					node.setDisable(true);
+    				}
     			}
     		} else if (currentAuth == Auth.LIBRARIAN){
     			functionList.add("#addMemberButton");
     			functionList.add("#addBookButton");
-//    			functionList.add("#checkout");
-//    			functionList.add("#checkin");
     			
     			for(String function : functionList){
-    				scene.lookup(function).setDisable(true);
+    				Node node = scene.lookup(function);
+    				if(node != null){
+    					node.setDisable(true);
+    				}
     			}
     		}
     		
