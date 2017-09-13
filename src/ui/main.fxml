@@ -25,7 +25,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.main.MainController">
+<StackPane fx:id="mainRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.SystemController">
    <children>
       <BorderPane prefHeight="505.0" prefWidth="844.0">
          <left>
@@ -82,7 +82,7 @@
          <center>
             <ImageView fitHeight="537.0" fitWidth="689.0" nodeOrientation="INHERIT" pickOnBounds="true" smooth="false" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../icons/library.jpg" />
+                  <Image url="@/ui/icons/library.jpg" />
                </image>
             </ImageView>
          </center>

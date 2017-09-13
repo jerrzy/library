@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane id="AnchorPane" prefHeight="250.0" prefWidth="404.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.addmember.MemberAddController">
+<AnchorPane id="AnchorPane" prefHeight="250.0" prefWidth="404.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.SystemController">
     <stylesheets>
         <URL value="@member_add.css" />
     </stylesheets>
@@ -18,22 +18,22 @@
          <center>
             <VBox prefHeight="153.0" prefWidth="404.0">
                <children>
-                  <TextField fx:id="name" promptText="Name">
+                  <TextField fx:id="name_AddMember" promptText="Name">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="20.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="id" layoutX="20.0" layoutY="30.0" promptText="Member ID">
+                  <TextField fx:id="id_AddMember" layoutX="20.0" layoutY="30.0" promptText="Member ID">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="20.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="mobile" layoutX="20.0" layoutY="30.0" promptText="Mobile">
+                  <TextField fx:id="mobile_AddMember" layoutX="20.0" layoutY="30.0" promptText="Mobile">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="20.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="email" layoutX="10.0" layoutY="62.0" promptText="email">
+                  <TextField fx:id="email_AddMember" layoutX="10.0" layoutY="62.0" promptText="email">
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" top="20.0" />
                      </VBox.margin>
@@ -44,8 +44,8 @@
          <bottom>
             <HBox prefHeight="47.0" prefWidth="404.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="saveButton" onAction="#addMember" prefHeight="66.0" prefWidth="250.0" stylesheets="@../addbook/addbook.css" text="Save" />
-                  <Button fx:id="cancelButton" layoutX="10.0" layoutY="10.0" onAction="#cancel" prefHeight="66.0" prefWidth="250.0" stylesheets="@../addbook/addbook.css" text="Cancel" />
+                  <Button fx:id="saveButton_AddMember" onAction="#addMember" prefHeight="66.0" prefWidth="250.0" stylesheets="@../addbook/addbook.css" text="Save" />
+                  <Button fx:id="cancelButton_AddMember" layoutX="10.0" layoutY="10.0" onAction="#cancel_AddMember" prefHeight="66.0" prefWidth="250.0" stylesheets="@../addbook/addbook.css" text="Cancel" />
                </children>
             </HBox>
          </bottom>
