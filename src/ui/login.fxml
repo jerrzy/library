@@ -12,19 +12,19 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane id="AnchorPane" prefHeight="254.0" prefWidth="344.0" stylesheets="@common.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.SystemController">
+<AnchorPane id="AnchorPane_login" prefHeight="254.0" prefWidth="344.0" stylesheets="@common.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.SystemController">
    <children>
-      <Label fx:id="titleLabel" alignment="CENTER" layoutX="14.0" layoutY="6.0" prefHeight="52.0" prefWidth="344.0" style="-fx-background-color: black;" text="Library System Login" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="titleLabel_login" alignment="CENTER" layoutX="14.0" layoutY="6.0" prefHeight="52.0" prefWidth="344.0" style="-fx-background-color: black;" text="Library System Login" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="username" layoutX="38.0" layoutY="81.0" prefHeight="24.0" prefWidth="272.0" promptText="Username">
+      <TextField fx:id="username_login" layoutX="38.0" layoutY="81.0" prefHeight="24.0" prefWidth="272.0" promptText="Username">
          <font>
             <Font size="16.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="password" layoutX="38.0" layoutY="131.0" prefHeight="24.0" prefWidth="272.0" promptText="Password">
+      <PasswordField fx:id="password_longin" layoutX="38.0" layoutY="131.0" prefHeight="24.0" prefWidth="272.0" promptText="Password">
          <font>
             <Font size="17.0" />
          </font>

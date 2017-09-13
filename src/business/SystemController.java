@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -36,6 +37,8 @@ public class SystemController implements ControllerInterface{
     /*
      * main UI
      */
+    @FXML
+    private StackPane mainRootPane;
     @FXML
     private HBox book_info;
     @FXML
@@ -63,11 +66,11 @@ public class SystemController implements ControllerInterface{
      * login UI
      */
     @FXML
-    private TextField username;
+    private TextField username_longin;
     @FXML
-    private PasswordField password;
+    private PasswordField password_longin;
     @FXML
-    private Label titleLabel;
+    private Label titleLabel_longin;
 
     /**
      * add book UI
@@ -143,6 +146,14 @@ public class SystemController implements ControllerInterface{
     	loadWindow("/listbook/book_list.fxml", "Book List");
     }
 
+    private void closeMainWindow(){
+    	((Stage)mainRootPane.getScene().getWindow()).close();
+    }
+    
+    private void closeLoginWindow(){
+    	((Stage)mainRootPane.getScene().getWindow()).close();	
+    }
+    
     void loadWindow(String loc, String title) {
     	try {
     		Parent parent = FXMLLoader.load(getClass().getResource(loc));
@@ -163,20 +174,20 @@ public class SystemController implements ControllerInterface{
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
 
-        titleLabel.setText("Library System Login");
-        titleLabel.setStyle("-fx-background-color:black;-fx-text-fikll:white");
+        titleLabel_longin.setText("Library System Login");
+        titleLabel_longin.setStyle("-fx-background-color:black;-fx-text-fikll:white");
 
-        String id = username.getText();
-        String pword = password.getText();
+        String id = username_longin.getText();
+        String pword = password_longin.getText();
 
         try {
             login(id, pword);
         } catch (Exception e) {
-            titleLabel.setText(e.getMessage());
-            titleLabel.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
+            titleLabel_longin.setText(e.getMessage());
+            titleLabel_longin.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
             e.printStackTrace();
         }
-        closeStage();
+        closeMainWindow();
         loadMain();
     }
 
@@ -252,9 +263,7 @@ public class SystemController implements ControllerInterface{
         AlertMaker.showSimpleAlert("Member Added", "Saved");
     }
     ///////////////////////////////////////////////////
-    private void closeStage() {
-        ((Stage)username.getScene().getWindow()).close();
-    }
+
 
 	public void login(String id, String password) throws LoginException {
 		DataAccess da = new DataAccessFacade();
