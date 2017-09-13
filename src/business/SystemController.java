@@ -121,8 +121,12 @@ public class SystemController implements ControllerInterface{
      * @param event
      */
     //////////////////////////////////////////////////////
-    void loadMain() {
+    private void loadMain() {
     	loadWindow("/ui/main.fxml", "Library System");
+    }
+    
+    private void loadLoginWindow(){
+    	loadWindow("/ui/login.fxml", "Library System");
     }
     
     @FXML
@@ -151,11 +155,15 @@ public class SystemController implements ControllerInterface{
     }
 
     private void closeMainWindow(){
-    	((Stage)mainRootPane.getScene().getWindow()).close();
+    	if(mainRootPane != null){
+    		((Stage)mainRootPane.getScene().getWindow()).close();	
+    	}
     }
     
     private void closeLoginWindow(){
-    	((Stage)anchorPane_login.getScene().getWindow()).close();	
+    	if(anchorPane_login != null){
+    		((Stage)anchorPane_login.getScene().getWindow()).close();	
+    	}
     }
     
     void loadWindow(String loc, String title) {
@@ -193,6 +201,17 @@ public class SystemController implements ControllerInterface{
         }
         closeLoginWindow();
         loadMain();
+    }
+    
+    @FXML
+    private void handleLogoutButtonAction(ActionEvent event) {
+
+//    	titleLabel_login.setText("Library System Login");
+//    	titleLabel_login.setStyle("-fx-background-color:black;-fx-text-fikll:white");
+    	logout();
+    	
+    	closeMainWindow();
+    	loadLoginWindow();
     }
 
     /**
@@ -289,6 +308,10 @@ public class SystemController implements ControllerInterface{
 		currentAuth = map.get(id).getAuthorization();
 	}
 
+	private void logout(){
+		currentAuth = null;
+	}
+	
     @Override
     public void addMember(LibraryMember member) {
     	
