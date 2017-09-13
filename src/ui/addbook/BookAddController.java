@@ -36,6 +36,7 @@ public class BookAddController implements Initializable {
 
     @FXML
     private void addBook(ActionEvent event) {
+    	
         String bookID = id.getText();
         String bookAuthor = author.getText();
         String bookName = title.getText();
