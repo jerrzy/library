@@ -67,12 +67,14 @@ public class SystemController implements ControllerInterface{
     /**
      * login UI
      */
+	@FXML
+	private AnchorPane anchorPane_login;
     @FXML
-    private TextField username_longin;
+    private TextField username_login;
     @FXML
-    private PasswordField password_longin;
+    private PasswordField password_login;
     @FXML
-    private Label titleLabel_longin;
+    private Label titleLabel_login;
 
     /**
      * add book UI
@@ -153,7 +155,7 @@ public class SystemController implements ControllerInterface{
     }
     
     private void closeLoginWindow(){
-    	((Stage)mainRootPane.getScene().getWindow()).close();	
+    	((Stage)anchorPane_login.getScene().getWindow()).close();	
     }
     
     void loadWindow(String loc, String title) {
@@ -176,20 +178,20 @@ public class SystemController implements ControllerInterface{
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
 
-        titleLabel_longin.setText("Library System Login");
-        titleLabel_longin.setStyle("-fx-background-color:black;-fx-text-fikll:white");
+    	titleLabel_login.setText("Library System Login");
+    	titleLabel_login.setStyle("-fx-background-color:black;-fx-text-fikll:white");
 
-        String id = username_longin.getText();
-        String pword = password_longin.getText();
+        String id = username_login.getText();
+        String pword = password_login.getText();
 
         try {
             login(id, pword);
         } catch (Exception e) {
-            titleLabel_longin.setText(e.getMessage());
-            titleLabel_longin.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
+        	titleLabel_login.setText(e.getMessage());
+        	titleLabel_login.setStyle("-fx-background-color:#d32f2f;-fx-text-fill:white");
             e.printStackTrace();
         }
-        closeMainWindow();
+        closeLoginWindow();
         loadMain();
     }
 
