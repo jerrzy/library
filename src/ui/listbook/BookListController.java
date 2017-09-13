@@ -38,8 +38,8 @@ public class BookListController implements Initializable{
     //    private TableColumn<Book, String> authorCol;
     //    @FXML
     //    private TableColumn<Book, String> publisherCol;
-    //    @FXML
-    //    private TableColumn<Book, Boolean> availabilityCol;
+        @FXML
+        private TableColumn<Book, Boolean> availabilityCol;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,7 +53,7 @@ public class BookListController implements Initializable{
         maxCheckoutLengthCol.setCellValueFactory(new PropertyValueFactory<>("maxCheckoutLength"));
         //        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
         //        publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-        //        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("availabilty"));
+                availabilityCol.setCellValueFactory(new PropertyValueFactory<>("availabilty"));
     }
 
     private void loadData() {
