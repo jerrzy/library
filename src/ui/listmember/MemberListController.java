@@ -1,15 +1,9 @@
 package ui.listmember;
 
-import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import Domain.Member;
-import dao.DataAccess;
-import javafx.beans.property.SimpleStringProperty;
+import business.LibraryMember;
+import dataaccess.DataAccess;
+import dataaccess.DataAccessFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.net.URL;
+import java.util.HashMap;
+import java.util.ResourceBundle;
 
 public class MemberListController implements Initializable {
 
@@ -47,10 +45,13 @@ public class MemberListController implements Initializable {
     }
     
     private void loadData() {
+        DataAccess da = new DataAccessFacade();
+
+        HashMap<String, LibraryMember> memberHashMap = da.readMemberMap();
         	
-    	for(Member member : DataAccess.instance().getMembers()){
-    		list.add(member.clone());
-    	} 
-        tableView.getItems().setAll(list);
+//    	for(Member member : DataAccess.instance().getMembers()){
+//    		list.add(member.clone());
+//    	}
+//        tableView.getItems().setAll(list);
     }
 }
