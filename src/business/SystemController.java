@@ -142,7 +142,7 @@ public class SystemController implements ControllerInterface{
 
     @FXML
     private void loadBookTable(ActionEvent event) {
-    	loadWindow("/listbook/book_list.fxml", "Book List");
+    	loadWindow("../ui/listbook/book_list.fxml", "Book List");
     }
 
     void loadWindow(String loc, String title) {
