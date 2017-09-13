@@ -28,6 +28,7 @@ public class MemberListController implements Initializable {
     private TableColumn<LibraryMember, String> emailCol;
 
     @Override
+    
     public void initialize(URL url, ResourceBundle rb) {
         initCol();
         loadData();

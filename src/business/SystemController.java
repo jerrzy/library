@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import dataaccess.Auth;
@@ -28,6 +29,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sun.security.x509.UniqueIdentity;
 import ui.AlertMaker;
 
 public class SystemController implements ControllerInterface{
@@ -249,6 +251,10 @@ public class SystemController implements ControllerInterface{
             AlertMaker.showErrorMessage("Cant add member", "Please Enter in all fields");
             return;
         }
+       String b= UUID.randomUUID().toString();
+       Address add=new Address(street, city, state, zip);
+       LibraryMember a=new LibraryMember(b, firstName, lastName, telephone, add);
+       
         AlertMaker.showSimpleAlert("Member Added", "Saved");
     }
     ///////////////////////////////////////////////////
