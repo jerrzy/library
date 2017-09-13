@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
@@ -17,6 +16,7 @@ import dataaccess.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -24,12 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ui.AlertMaker;
@@ -43,28 +39,16 @@ public class SystemController implements ControllerInterface{
     @FXML
     private StackPane mainRootPane;
     @FXML
-    private HBox book_info;
+    private Button addMemberButton;
     @FXML
-    private HBox member_info;
+    private Button addBookButton;
     @FXML
-    private TextField bookIDInput;
+    private Button loadMemberButton;
     @FXML
-    private Text bookName;
+    private Button loadBookButton;
     @FXML
-    private Text bookAuthor;
-    @FXML
-    private Text bookStatus;
-    @FXML
-    private TextField memberIDInput;
-    @FXML
-    private Text memberName;
-    @FXML
-    private Text memberMobile;
-    @FXML
-    private ImageView issueButton;
-    @FXML
-    private TextField bookID;
-
+    private Button logoutButton;
+    
     /**
      * login UI
      */
@@ -191,9 +175,12 @@ public class SystemController implements ControllerInterface{
     void loadWindow(String loc, String title) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(loc));
-            Stage stage = new Stage(StageStyle.DECORATED);
+            
+            Stage stage = new Stage(StageStyle.DECORATED);            
             stage.setTitle(title);
-            stage.setScene(new Scene(parent));
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
+            applyPermission(scene);
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(SystemController.class.getName()).log(Level.SEVERE, null, ex);
@@ -227,6 +214,32 @@ public class SystemController implements ControllerInterface{
         loadMain();
     }
 
+    private void applyPermission(Scene scene){
+    	
+    	if(currentAuth != null){
+    		List<String> functionList = new ArrayList<>();
+    		if(currentAuth == Auth.ADMIN){
+//    			functionList.add("#addMemberButton");
+    			functionList.add("#checkout");
+    			functionList.add("#checkin");
+    			
+    			for(String function : functionList){
+    				scene.lookup(function).setDisable(true);
+    			}
+    		} else if (currentAuth == Auth.LIBRARIAN){
+    			functionList.add("#addMemberButton");
+    			functionList.add("#addBookButton");
+//    			functionList.add("#checkout");
+//    			functionList.add("#checkin");
+    			
+    			for(String function : functionList){
+    				scene.lookup(function).setDisable(true);
+    			}
+    		}
+    		
+    	}
+    }
+    
     @FXML
     private void handleLogoutButtonAction(ActionEvent event) {
 
