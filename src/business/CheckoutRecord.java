@@ -1,6 +1,7 @@
 package business;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class CheckoutRecord implements Serializable{
         checkoutRecordEntries = new LinkedList<>();
     }
 
-    public void addCheckoutRecordEntry(BookCopy bookCopy, Date dateOfCheckout, Date dueDate) {
+    public void addCheckoutRecordEntry(BookCopy bookCopy, LocalDate dateOfCheckout, LocalDate dueDate) {
         CheckoutRecordEntry checkoutRecordEntry = new CheckoutRecordEntry(bookCopy,dateOfCheckout,dueDate);
 
         checkoutRecordEntries.add(checkoutRecordEntry);

@@ -245,7 +245,7 @@ public class SystemController implements ControllerInterface{
     private void closeStage() {
         ((Stage)username.getScene().getWindow()).close();
     }
-	
+
 	public void login(String id, String password) throws LoginException {
 		DataAccess da = new DataAccessFacade();
 		HashMap<String, User> map = da.readUserMap();
@@ -256,7 +256,7 @@ public class SystemController implements ControllerInterface{
 		if(!passwordFound.equals(password)) {
 			throw new LoginException("Password incorrect");
 		}
-		currentAuth = map.get(id).getAuthorization();		
+		currentAuth = map.get(id).getAuthorization();
 	}
 
     @Override

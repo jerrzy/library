@@ -3,6 +3,7 @@ package business;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
@@ -56,8 +57,9 @@ public class BookCopyService{
 
         bookCopy.changeAvailability();
 
-        Date dateOfCheckout = new Date();
-        Date dueDate = Date.from(LocalDateTime.from(dateOfCheckout.toInstant()).plus(book.getMaxCheckoutLength(), ChronoUnit.DAYS).toInstant(ZoneOffset.of("-06:00")));
+        LocalDate dateOfCheckout = LocalDate.now();
+
+        LocalDate dueDate = dateOfCheckout.plus(book.getMaxCheckoutLength(), ChronoUnit.DAYS);
 
         member.getCheckoutRecord().addCheckoutRecordEntry(bookCopy,dateOfCheckout,dueDate);
 
