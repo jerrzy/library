@@ -94,7 +94,7 @@ public class BookListController implements Initializable{
                             btn.setOnAction(event -> {
                                 Book book = getTableView().getItems().get(getIndex());
                                 showCopies(book.getIsbn());
-                                System.out.println(book.getIsbn() + "   " + book.getMaxCheckoutLength());
+//                                System.out.println(book.getIsbn() + "   " + book.getMaxCheckoutLength());
                             });
                             setGraphic(btn);
                             setText(null);
@@ -128,7 +128,7 @@ public class BookListController implements Initializable{
         copyNumberCol.setCellValueFactory(new PropertyValueFactory<>("copyNum"));
 
         TableColumn availabilityCol = new TableColumn("availability");
-        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("Available"));
+        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("available"));
 
 //        TableColumn actionCol = new TableColumn("Action");
 //        actionCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
@@ -178,6 +178,9 @@ public class BookListController implements Initializable{
         table.getColumns().addAll(copyNumberCol, availabilityCol);
 
         Scene scene = new Scene(new Group());
+
+        String css = this.getClass().getResource("book_list.css").toExternalForm();
+        scene.getStylesheets().add(css);
 
         ((Group) scene.getRoot()).getChildren().addAll(table);
         Stage stage = new Stage(StageStyle.DECORATED);
