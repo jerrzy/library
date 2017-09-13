@@ -124,6 +124,13 @@ public class SystemController implements ControllerInterface{
     @FXML
     private Button cancelButton_AddMember;
 
+    /**
+     * check in & check out
+     */
+    @FXML
+    private TextField checkInOutBookISBN;
+    @FXML
+    private TextField checkInOutMemID;
     //////////////////////////////////////////////////////
 
     /**
@@ -344,7 +351,9 @@ public class SystemController implements ControllerInterface{
      */
     @FXML
     private void handleCheckOut(ActionEvent event){
-    	AlertMaker.showSimpleAlert("Book checked out", "Saved");
+    	String checkInOutBookISBNS = checkInOutBookISBN.getText();
+    	String checkInOutMemIDS = checkInOutMemID.getText();
+    	AlertMaker.showSimpleAlert("Book checked out", "Book ISBN:" + checkInOutBookISBNS + ". Member ID:" + checkInOutMemIDS);
     }
     
     /**
@@ -353,7 +362,9 @@ public class SystemController implements ControllerInterface{
      */
     @FXML
     private void handleCheckIn(ActionEvent event){
-    	AlertMaker.showSimpleAlert("Book checked in", "Saved");
+    	String checkInOutBookISBNS = checkInOutBookISBN.getText();
+    	String checkInOutMemIDS = checkInOutMemID.getText();
+    	AlertMaker.showSimpleAlert("Book checked in", "Book ISBN:" + checkInOutBookISBNS + ". Member ID:" + checkInOutMemIDS);
     }
     ///////////////////////////////////////////////////
 
