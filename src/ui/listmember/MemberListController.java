@@ -64,7 +64,7 @@ public class MemberListController implements Initializable{
             public TableCell call(final TableColumn<LibraryMember, String> param) {
                 final TableCell<LibraryMember, String> cell = new TableCell<LibraryMember, String>(){
 
-                    final Button btn = new Button("copies");
+                    final Button btn = new Button("records");
 
                     @Override
                     public void updateItem(String item, boolean empty) {
@@ -120,8 +120,10 @@ public class MemberListController implements Initializable{
         TableColumn dueDateCol = new TableColumn("Due Date");
         dueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
 
-
         TableView<CheckoutRecordEntry> table = new TableView<>();
+
+        table.setMinWidth(650);
+
         ObservableList<CheckoutRecordEntry> data = FXCollections.observableArrayList();
 
         int i = 0;
