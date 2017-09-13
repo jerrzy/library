@@ -1,5 +1,8 @@
 package business;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +28,6 @@ final public class Book implements Serializable{
         this.maxCheckoutLength = maxCheckoutLength;
         this.authors = Collections.unmodifiableList(authors);
         copies = new BookCopy[] {new BookCopy(this, 1, true)};
-
     }
 
     public void updateCopies(BookCopy copy) {
