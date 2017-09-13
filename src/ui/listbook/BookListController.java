@@ -34,6 +34,9 @@ public class BookListController implements Initializable{
     @FXML
     private TableColumn<Book, String> maxCheckoutLengthCol;
 
+        @FXML
+        private TableColumn<Book, String> numOfCopiesCol;
+
     //    @FXML
     //    private TableColumn<Book, String> authorCol;
     //    @FXML
@@ -51,14 +54,13 @@ public class BookListController implements Initializable{
         idCol.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         maxCheckoutLengthCol.setCellValueFactory(new PropertyValueFactory<>("maxCheckoutLength"));
+        numOfCopiesCol.setCellValueFactory(new PropertyValueFactory<>("numOfCopies"));
         //        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
         //        publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
                 availabilityCol.setCellValueFactory(new PropertyValueFactory<>("availabilty"));
     }
 
     private void loadData() {
-        // TODO .. add books into list
-
         DataAccess da = new DataAccessFacade();
 
         HashMap<String, Book> booksMap = da.readBooksMap();

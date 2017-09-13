@@ -344,27 +344,43 @@ public class SystemController implements ControllerInterface{
 
         AlertMaker.showSimpleAlert("Member Added", "Saved");
     }
-    
+
     ///////////////////////////////////////////////////
+
     /**
      * check out
      */
     @FXML
-    private void handleCheckOut(ActionEvent event){
-    	String checkInOutBookISBNS = checkInOutBookISBN.getText();
-    	String checkInOutMemIDS = checkInOutMemID.getText();
-    	AlertMaker.showSimpleAlert("Book checked out", "Book ISBN:" + checkInOutBookISBNS + ". Member ID:" + checkInOutMemIDS);
+    private void handleCheckOut(ActionEvent event) {
+        String checkInOutBookISBNS = checkInOutBookISBN.getText();
+        String checkInOutMemIDS = checkInOutMemID.getText();
+        try {
+            checkoutBook(checkInOutMemIDS, checkInOutBookISBNS);
+        } catch (LibrarySystemException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("checkout book copy");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            e.printStackTrace();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("checkout book copy");
+        alert.setContentText("Success");
+        alert.showAndWait();
     }
-    
+
     /**
      * check in
+     *
      * @param event
      */
     @FXML
-    private void handleCheckIn(ActionEvent event){
-    	String checkInOutBookISBNS = checkInOutBookISBN.getText();
-    	String checkInOutMemIDS = checkInOutMemID.getText();
-    	AlertMaker.showSimpleAlert("Book checked in", "Book ISBN:" + checkInOutBookISBNS + ". Member ID:" + checkInOutMemIDS);
+    private void handleCheckIn(ActionEvent event) {
+        String checkInOutBookISBNS = checkInOutBookISBN.getText();
+        String checkInOutMemIDS = checkInOutMemID.getText();
+        AlertMaker.showSimpleAlert("Book checked in", "Book ISBN:" + checkInOutBookISBNS + ". Member ID:" + checkInOutMemIDS);
     }
     ///////////////////////////////////////////////////
 
@@ -405,9 +421,9 @@ public class SystemController implements ControllerInterface{
     @Override
     public void addBookCopy(String isbn) throws LibrarySystemException {
         //TODO check the auth
-//        if (currentAuth == null || (currentAuth != Auth.ADMIN && currentAuth != Auth.BOTH)) {
-//            throw new LibrarySystemException("no right!");
-//        }
+        //        if (currentAuth == null || (currentAuth != Auth.ADMIN && currentAuth != Auth.BOTH)) {
+        //            throw new LibrarySystemException("no right!");
+        //        }
 
         new BookCopyService().addBookCopy(isbn);
     }
