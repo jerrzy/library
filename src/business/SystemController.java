@@ -16,17 +16,15 @@ import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 import dataaccess.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -119,7 +117,8 @@ public class SystemController implements ControllerInterface{
     private TextField checkInOutBookISBN;
     @FXML
     private TextField checkInOutMemID;
-    //////////////////////////////////////////////////////
+
+   //////////////////////////////////////////////////////
 
     /**
      * load window
@@ -289,7 +288,6 @@ public class SystemController implements ControllerInterface{
             return;
         }
 
-        // todo.. addBookCopy logical code
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setContentText("Success");
@@ -310,7 +308,6 @@ public class SystemController implements ControllerInterface{
             e.printStackTrace();
             return;
         }
-        // todo.. addBookCopy logical code
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setContentText("Success");

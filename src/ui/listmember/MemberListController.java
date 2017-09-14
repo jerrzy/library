@@ -25,8 +25,6 @@ import javafx.util.Callback;
 
 public class MemberListController implements Initializable{
 
-    ObservableList<LibraryMember> list = FXCollections.observableArrayList();
-
     @FXML
     private TableView<LibraryMember> tableView;
     @FXML
@@ -41,7 +39,7 @@ public class MemberListController implements Initializable{
     private TableColumn<LibraryMember, String> addressCol;
 
     @FXML
-    private TableColumn actionCol;
+    private TableColumn memActionCol;
 
     @Override
 
@@ -57,7 +55,7 @@ public class MemberListController implements Initializable{
         mobileCol.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("addressStr"));
 
-        actionCol.setCellValueFactory(new PropertyValueFactory<>("ggg"));
+        memActionCol.setCellValueFactory(new PropertyValueFactory<>("ggg"));
 
         Callback<TableColumn<LibraryMember, String>, TableCell<LibraryMember, String>> cellFactory = new Callback<TableColumn<LibraryMember, String>, TableCell<LibraryMember, String>>(){
             @Override
@@ -86,14 +84,15 @@ public class MemberListController implements Initializable{
             }
         };
 
-        actionCol.setCellFactory(cellFactory);
+        memActionCol.setCellFactory(cellFactory);
     }
 
     private void loadData() { //
 
-        // todo.. add members into list
+        // add members into list
         DataAccess da = new DataAccessFacade();
         HashMap<String, LibraryMember> libraryMemberMap = da.readMemberMap();
+        ObservableList<LibraryMember> list = FXCollections.observableArrayList();
         int i = 0;
         for (Map.Entry<String, LibraryMember> e : libraryMemberMap.entrySet()) {
             list.add(i++, e.getValue());

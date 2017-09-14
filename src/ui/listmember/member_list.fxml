@@ -19,7 +19,7 @@
             <TableColumn fx:id="mobileCol" prefWidth="75.0" text="Mobile" />
             <TableColumn fx:id="addressCol" prefWidth="75.0" text="Address" />
 
-            <TableColumn fx:id="actionCol" prefWidth="75.0" text="action"/>
+            <TableColumn fx:id="memActionCol" prefWidth="75.0" text="action"/>
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -3,7 +3,6 @@ package ui.listbook;
 import business.Author;
 import business.Book;
 import business.BookCopy;
-import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 import javafx.collections.FXCollections;
@@ -29,33 +28,30 @@ import java.util.ResourceBundle;
 
 public class BookListController implements Initializable{
 
-    ObservableList<Book> list = FXCollections.observableArrayList();
-
     @FXML
     private AnchorPane rootPane_bookList;
     @FXML
-    private TableView<Book> tableView;
+    private TableView<Book> bookTableView;
     @FXML
-    private TableColumn<Book, String> idCol;
+    private TableColumn<Book, String> bookIdCol;
 
     @FXML
-    private TableColumn<Book, String> titleCol;
+    private TableColumn<Book, String> bookTitleCol;
 
     @FXML
-    private TableColumn<Book, Integer> maxCheckoutLengthCol;
+    private TableColumn<Book, Integer> bookMaxCheckoutLengthCol;
 
     @FXML
-    private TableColumn<Book, String> numOfCopiesCol;
+    private TableColumn<Book, String> bookNumOfCopiesCol;
 
     @FXML
-    private TableColumn authorCol;
-    //    @FXML
-    //    private TableColumn<Book, String> publisherCol;
-    @FXML
-    private TableColumn<Book, Boolean> availabilityCol;
+    private TableColumn bookAuthorCol;
 
     @FXML
-    private TableColumn actionCol;
+    private TableColumn<Book, Boolean> bookAvailabilityCol;
+
+    @FXML
+    private TableColumn bookActionCol;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,11 +60,11 @@ public class BookListController implements Initializable{
     }
 
     private void initCol() {
-        idCol.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        maxCheckoutLengthCol.setCellValueFactory(new PropertyValueFactory<>("maxCheckoutLength"));
-        numOfCopiesCol.setCellValueFactory(new PropertyValueFactory<>("numOfCopies"));
-        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        bookIdCol.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        bookTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        bookMaxCheckoutLengthCol.setCellValueFactory(new PropertyValueFactory<>("maxCheckoutLength"));
+        bookNumOfCopiesCol.setCellValueFactory(new PropertyValueFactory<>("numOfCopies"));
+        bookAuthorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
 
         Callback<TableColumn<Book, String>, TableCell<Book, String>> authorCellFactory = new Callback<TableColumn<Book, String>, TableCell<Book, String>>(){
             @Override
@@ -99,11 +95,11 @@ public class BookListController implements Initializable{
 
         };
 
-        authorCol.setCellFactory(authorCellFactory);
+        bookAuthorCol.setCellFactory(authorCellFactory);
 
         //        publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("availabilty"));
-        actionCol.setCellValueFactory(new PropertyValueFactory<>("ggg"));
+        bookAvailabilityCol.setCellValueFactory(new PropertyValueFactory<>("availabilty"));
+        bookActionCol.setCellValueFactory(new PropertyValueFactory<>("ggg"));
 
         Callback<TableColumn<Book, String>, TableCell<Book, String>> actionCellFactory = new Callback<TableColumn<Book, String>, TableCell<Book, String>>(){
             @Override
@@ -133,19 +129,21 @@ public class BookListController implements Initializable{
             }
         };
 
-        actionCol.setCellFactory(actionCellFactory);
+        bookActionCol.setCellFactory(actionCellFactory);
     }
 
     private void loadData() {
         DataAccess da = new DataAccessFacade();
 
+        ObservableList<Book> bookList = FXCollections.observableArrayList();
+
         HashMap<String, Book> booksMap = da.readBooksMap();
         int i = 0;
         for (Map.Entry<String, Book> e : booksMap.entrySet()) {
-            list.add(i++, e.getValue());
+            bookList.add(i++, e.getValue());
         }
 
-        tableView.getItems().setAll(list);
+        bookTableView.getItems().setAll(bookList);
     }
 
     private void showCopies(String isbn) {
@@ -176,7 +174,7 @@ public class BookListController implements Initializable{
 
         ((Group)scene.getRoot()).getChildren().addAll(table);
         Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle(book.getTitle() + " copy list");
+        stage.setTitle(book.getTitle() + " copy bookList");
         stage.setScene(scene);
         stage.show();
     }
@@ -223,7 +221,7 @@ public class BookListController implements Initializable{
 
         ((Group)scene.getRoot()).getChildren().addAll(table);
         Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle(book.getTitle() + " author list");
+        stage.setTitle(book.getTitle() + " author bookList");
         stage.setScene(scene);
         stage.show();
     }

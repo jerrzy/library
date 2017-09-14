@@ -12,17 +12,17 @@
         <URL value="@book_list.css"/>
     </stylesheets>
     <children>
-        <TableView fx:id="tableView" layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0"
+        <TableView fx:id="bookTableView" layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0"
                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                    AnchorPane.topAnchor="0.0">
             <columns>
-                <TableColumn fx:id="idCol" prefWidth="75.0" text="ISBN"/>
-                <TableColumn fx:id="titleCol" prefWidth="75.0" text="Title"/>
-                <TableColumn fx:id="maxCheckoutLengthCol" prefWidth="75.0" text="maxCheckoutLength"/>
-                <TableColumn fx:id="numOfCopiesCol" prefWidth="75.0" text="the number of book copies"/>
-                 <TableColumn fx:id="authorCol" prefWidth="75.0" text="Author" />
-                <TableColumn fx:id="availabilityCol" prefWidth="75.0" text="Availability"/>
-                <TableColumn fx:id="actionCol" prefWidth="75.0" text="action"/>
+                <TableColumn fx:id="bookIdCol" prefWidth="75.0" text="ISBN"/>
+                <TableColumn fx:id="bookTitleCol" prefWidth="75.0" text="Title"/>
+                <TableColumn fx:id="bookMaxCheckoutLengthCol" prefWidth="75.0" text="maxCheckoutLength"/>
+                <TableColumn fx:id="bookNumOfCopiesCol" prefWidth="75.0" text="the number of book copies"/>
+                 <TableColumn fx:id="bookAuthorCol" prefWidth="75.0" text="Author" />
+                <TableColumn fx:id="bookAvailabilityCol" prefWidth="75.0" text="Availability"/>
+                <TableColumn fx:id="bookActionCol" prefWidth="75.0" text="action"/>
 
             </columns>
             <columnResizePolicy>
