@@ -110,6 +110,27 @@ public class SystemController implements ControllerInterface{
     @FXML
     private TextField checkInOutMemID;
 
+    /**
+     * add author UI
+     */
+    @FXML
+    private TextField addAuthorFirstName;
+    @FXML
+    private TextField addAuthorLastName;
+    @FXML
+    private TextField addAuthorTelephone;
+    @FXML
+    private TextField addAuthorCredentials;
+    @FXML
+    private TextField addAuthorBIO;
+    @FXML
+    private TextField addAuthorStreet;
+    @FXML
+    private TextField addAuthorCity;
+    @FXML
+    private TextField addAuthorState;
+    @FXML
+    private TextField addAuthorZip;
    //////////////////////////////////////////////////////
 
     /**
@@ -137,6 +158,11 @@ public class SystemController implements ControllerInterface{
     @FXML
     private void loadAddBook(ActionEvent event) {
         loadWindow("/ui/addbook.fxml", "Add New Book");
+    }
+    
+    @FXML
+    private void loadAddAuthorWindow(ActionEvent event) {
+        loadWindow("/ui/addauthor.fxml", "Add New Author");
     }
 
     @FXML
@@ -260,7 +286,7 @@ public class SystemController implements ControllerInterface{
     
     @FXML
     private void handleAddAuthorButton(ActionEvent event){
-    	
+    	loadAddAuthorWindow(event);
     }
     
     @FXML
@@ -273,6 +299,32 @@ public class SystemController implements ControllerInterface{
     	
     }
     
+    //////////////////////////////////////////////////////////////////
+    /**
+     * retrieve an author
+     * @param event
+     */
+    @FXML
+    private void retrieveAuthor(ActionEvent event){
+    	
+    }
+    
+    /**
+     * add an author to a book
+     * @param event
+     */
+    @FXML
+    private void addAuthor(ActionEvent event){
+    	String currentAuthors = newBookAuthors.getText();
+    	String newAuthorFirstName = addAuthorFirstName.getText();
+    	String newAuthorLastName = addAuthorLastName.getText();
+    	newBookAuthors.setText(currentAuthors + "," + newAuthorFirstName + " " + newAuthorLastName);
+    }
+    
+    @FXML
+    private void cancelAddAuthor(ActionEvent event){
+    	
+    }
     /**
      * handle login cancel
      *
