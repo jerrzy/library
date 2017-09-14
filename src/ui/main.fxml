@@ -40,7 +40,8 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="addBookButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#loadAddBookCopy" prefHeight="150.0" prefWidth="154.0" text="Add Book Copy">
+                  <Button id="addBookButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#handleAddBook" prefHeight="150.0" prefWidth="154.0" text="Add Book" />
+                  <Button id="addBookCopyButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#loadAddBookCopy" prefHeight="150.0" prefWidth="154.0" text="Add Book Copy">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>

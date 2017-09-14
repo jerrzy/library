@@ -8,16 +8,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 import dataaccess.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +40,8 @@ public class SystemController implements ControllerInterface{
     @FXML
     private Button addBookButton;
     @FXML
+    private Button addBookCopyButton;
+    @FXML
     private Button loadMemberButton;
     @FXML
     private Button loadBookButton;
@@ -66,19 +64,13 @@ public class SystemController implements ControllerInterface{
      * add book UI
      */
     @FXML
-    private TextField title;
-    @FXML
-    private TextField id;
-    @FXML
-    private TextField author;
-    @FXML
-    private TextField publisher;
-    @FXML
-    private Button saveButton;
-    @FXML
-    private Button cancelButton;
-    @FXML
     private AnchorPane rootPane_AddBook;
+    @FXML
+    private TextField newBookTitle;
+    @FXML
+    private TextField newBookISBN;
+    @FXML
+    private TextField newBookAuthors;
 
     /**
      * add book copy UI
@@ -157,7 +149,7 @@ public class SystemController implements ControllerInterface{
     private void loadAddBookCopy(ActionEvent event) {
         loadWindow("/ui/addbookCopy.fxml", "Add New Book Copy");
     }
-
+    
     @FXML
     private void loadMemberTable(ActionEvent event) {
         loadWindow("/ui/listmember/member_list.fxml", "Member List");
@@ -239,7 +231,7 @@ public class SystemController implements ControllerInterface{
                 }
             } else if (currentAuth == Auth.LIBRARIAN) {
                 functionList.add("#addMemberButton");
-                functionList.add("#addBookButton");
+                functionList.add("#addBookCopyButton");
 
                 for (String function : functionList) {
                     Node node = scene.lookup(function);
@@ -264,6 +256,30 @@ public class SystemController implements ControllerInterface{
     }
 
     /**
+     * show add book window 
+     * @param event
+     */
+    @FXML
+    private void handleAddBook(ActionEvent event){
+    	loadAddBook(event);
+    }
+    
+    @FXML
+    private void handleAddAuthorButton(ActionEvent event){
+    	
+    }
+    
+    @FXML
+    private void handleAddBookButton(ActionEvent event){
+    	
+    }
+    
+    @FXML
+    private void handleCancelAddBookButton(ActionEvent event){
+    	
+    }
+    
+    /**
      * handle login cancel
      *
      * @param event
@@ -281,12 +297,11 @@ public class SystemController implements ControllerInterface{
     @FXML
     private void addBook(ActionEvent event) {
 
-        String bookID = id.getText();
-        String bookAuthor = author.getText();
-        String bookName = title.getText();
-        String bookPublisher = publisher.getText();
+        String bookID = newBookISBN.getText();
+        String bookAuthor = newBookAuthors.getText();
+        String bookName = newBookTitle.getText();
 
-        if (bookID.isEmpty() || bookAuthor.isEmpty() || bookName.isEmpty() || bookPublisher.isEmpty()) {
+        if (bookID.isEmpty() || bookAuthor.isEmpty() || bookName.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Please Enter in all fields");
