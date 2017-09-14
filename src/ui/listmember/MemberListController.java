@@ -73,7 +73,11 @@ public class MemberListController implements Initializable{
                         } else {
                             btn.setOnAction(event -> {
                                 LibraryMember member = getTableView().getItems().get(getIndex());
-                                showCheckoutRecords(member.getMemberId());
+                                try {
+                                    new CheckoutRecordService().showCheckoutRecords(member.getMemberId());
+                                }catch (LibrarySystemException e){
+                                    //ignore
+                                }
                             });
                             setGraphic(btn);
                             setText(null);
@@ -101,51 +105,5 @@ public class MemberListController implements Initializable{
         tableView.getItems().setAll(list);
     }
 
-    private void showCheckoutRecords(String memberId) {
-        DataAccess da = new DataAccessFacade();
 
-       LibraryMember member = da.findMemberById(memberId);
-
-        CheckoutRecord checkoutRecord = member.getCheckoutRecord();
-
-        TableColumn bookTitleCol = new TableColumn("Book Title");
-        bookTitleCol.setCellValueFactory(new PropertyValueFactory<>("bookTile"));
-
-        TableColumn bookIsbnCol = new TableColumn("ISBN");
-        bookIsbnCol.setCellValueFactory(new PropertyValueFactory<>("bookIsbn"));
-
-        TableColumn bookCopyNumCol = new TableColumn("Book Copy number");
-        bookCopyNumCol.setCellValueFactory(new PropertyValueFactory<>("bookCopyNum"));
-
-        TableColumn checkoutDateCol = new TableColumn("Checkout Date");
-        checkoutDateCol.setCellValueFactory(new PropertyValueFactory<>("dateOfCheckout"));
-
-        TableColumn dueDateCol = new TableColumn("Due Date");
-        dueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
-
-        TableView<CheckoutRecordEntry> table = new TableView<>();
-
-        table.setMinWidth(650);
-
-        ObservableList<CheckoutRecordEntry> data = FXCollections.observableArrayList();
-
-        int i = 0;
-        for (CheckoutRecordEntry bc : checkoutRecord.getCheckoutRecordEntries()) {
-            data.add(i++, bc);
-        }
-
-        table.setItems(data);
-        table.getColumns().addAll(bookTitleCol, bookIsbnCol, bookCopyNumCol, checkoutDateCol, dueDateCol);
-
-        Scene scene = new Scene(new Group());
-
-        String css = this.getClass().getResource("member_list.css").toExternalForm();
-        scene.getStylesheets().add(css);
-
-        ((Group)scene.getRoot()).getChildren().addAll(table);
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle(member.getFirstName()+" checkout records");
-        stage.setScene(scene);
-        stage.show();
-    }
 }
