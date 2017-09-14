@@ -2,6 +2,8 @@ package business;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
@@ -48,7 +51,7 @@ public class SystemController implements ControllerInterface{
     private Button loadBookButton;
     @FXML
     private Button logoutButton;
-    
+
     /**
      * login UI
      */
@@ -175,8 +178,8 @@ public class SystemController implements ControllerInterface{
     void loadWindow(String loc, String title) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(loc));
-            
-            Stage stage = new Stage(StageStyle.DECORATED);            
+
+            Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle(title);
             Scene scene = new Scene(parent);
             stage.setScene(scene);
@@ -215,35 +218,35 @@ public class SystemController implements ControllerInterface{
         loadMain();
     }
 
-    private void applyPermission(Scene scene){
-    	
-    	if(currentAuth != null){
-    		List<String> functionList = new ArrayList<>();
-    		if(currentAuth == Auth.ADMIN){
-    			functionList.add("#checkout");
-    			functionList.add("#checkin");
-    			
-    			for(String function : functionList){
-    				Node node = scene.lookup(function);
-    				if(node != null){
-    					node.setDisable(true);
-    				}
-    			}
-    		} else if (currentAuth == Auth.LIBRARIAN){
-    			functionList.add("#addMemberButton");
-    			functionList.add("#addBookButton");
-    			
-    			for(String function : functionList){
-    				Node node = scene.lookup(function);
-    				if(node != null){
-    					node.setDisable(true);
-    				}
-    			}
-    		}
-    		
-    	}
+    private void applyPermission(Scene scene) {
+
+        if (currentAuth != null) {
+            List<String> functionList = new ArrayList<>();
+            if (currentAuth == Auth.ADMIN) {
+                functionList.add("#checkout");
+                functionList.add("#checkin");
+
+                for (String function : functionList) {
+                    Node node = scene.lookup(function);
+                    if (node != null) {
+                        node.setDisable(true);
+                    }
+                }
+            } else if (currentAuth == Auth.LIBRARIAN) {
+                functionList.add("#addMemberButton");
+                functionList.add("#addBookButton");
+
+                for (String function : functionList) {
+                    Node node = scene.lookup(function);
+                    if (node != null) {
+                        node.setDisable(true);
+                    }
+                }
+            }
+
+        }
     }
-    
+
     @FXML
     private void handleLogoutButtonAction(ActionEvent event) {
 
@@ -355,7 +358,7 @@ public class SystemController implements ControllerInterface{
         }
         DataAccessFacade c = new DataAccessFacade();
 
-//        String b = UUID.randomUUID().toString();
+        //        String b = UUID.randomUUID().toString();
         String b = c.getUniqueId();
 
         Address add = new Address(street, city, state, zip);
@@ -441,12 +444,24 @@ public class SystemController implements ControllerInterface{
 
     @Override
     public void addBookCopy(String isbn) throws LibrarySystemException {
-        //TODO check the auth
-        //        if (currentAuth == null || (currentAuth != Auth.ADMIN && currentAuth != Auth.BOTH)) {
-        //            throw new LibrarySystemException("no right!");
-        //        }
+        //       check the auth
+        if (currentAuth == null || (currentAuth != Auth.ADMIN && currentAuth != Auth.BOTH)) {
+            throw new LibrarySystemException("no right!");
+        }
+        if (isEmpty(isbn)) {
+            throw new LibrarySystemException("isbn can not be empty!");
+        }
+        DataAccess da = new DataAccessFacade();
 
-        new BookCopyService().addBookCopy(isbn);
+        Book book = da.findBookByIsbn(isbn);
+
+        if (book == null) {
+            throw new LibrarySystemException("The book whose isbn is " + isbn + " doesn't exist!");
+        }
+
+        book.addCopy();
+
+        da.saveBook(book);
     }
 
     @Override
@@ -454,12 +469,56 @@ public class SystemController implements ControllerInterface{
         if (currentAuth == null || (currentAuth != Auth.LIBRARIAN && currentAuth != Auth.BOTH)) {
             throw new LibrarySystemException("no right!");
         }
-        new BookCopyService().checkoutBook(memberId, isbn);
+        if (isEmpty(memberId)) {
+            throw new LibrarySystemException("memberId can not be empty!");
+        }
+
+        if (isEmpty(isbn)) {
+            throw new LibrarySystemException("isbn can not be empty!");
+        }
+
+        DataAccess da = new DataAccessFacade();
+
+        LibraryMember member = da.findMemberById(memberId);
+        if (member == null) {
+            throw new LibrarySystemException("Member doesn't exist! memberId=" + memberId);
+        }
+
+        Book book = da.findBookByIsbn(isbn);
+        if (book == null) {
+            throw new LibrarySystemException("Book doesn't exist! isbn=" + isbn);
+        }
+
+        if (!book.isAvailable()) {
+            throw new LibrarySystemException("Book is not available! isbn=" + isbn);
+        }
+
+        BookCopy bookCopy = book.getNextAvailableCopy();
+
+        bookCopy.changeAvailability();
+
+        LocalDate dateOfCheckout = LocalDate.now();
+
+        LocalDate dueDate = dateOfCheckout.plus(book.getMaxCheckoutLength(), ChronoUnit.DAYS);
+
+        member.getCheckoutRecord().addCheckoutRecordEntry(bookCopy,dateOfCheckout,dueDate);
+
+        da.saveNewMember(member);
+
+        da.saveBook(book);
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    private boolean isEmpty(String content) {
+        if (content == null || content.trim().equals("")) {
+            return true;
+        }
+
+        return false;
     }
 }

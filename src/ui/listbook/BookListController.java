@@ -47,8 +47,8 @@ public class BookListController implements Initializable{
     @FXML
     private TableColumn<Book, String> numOfCopiesCol;
 
-        @FXML
-        private TableColumn authorCol;
+    @FXML
+    private TableColumn authorCol;
     //    @FXML
     //    private TableColumn<Book, String> publisherCol;
     @FXML
@@ -68,7 +68,7 @@ public class BookListController implements Initializable{
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         maxCheckoutLengthCol.setCellValueFactory(new PropertyValueFactory<>("maxCheckoutLength"));
         numOfCopiesCol.setCellValueFactory(new PropertyValueFactory<>("numOfCopies"));
-                authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
 
         Callback<TableColumn<Book, String>, TableCell<Book, String>> authorCellFactory = new Callback<TableColumn<Book, String>, TableCell<Book, String>>(){
             @Override
@@ -122,7 +122,7 @@ public class BookListController implements Initializable{
                             btn.setOnAction(event -> {
                                 Book book = getTableView().getItems().get(getIndex());
                                 showCopies(book.getIsbn());
-//                                System.out.println(book.getIsbn() + "   " + book.getMaxCheckoutLength());
+                                //                                System.out.println(book.getIsbn() + "   " + book.getMaxCheckoutLength());
                             });
                             setGraphic(btn);
                             setText(null);
@@ -159,12 +159,11 @@ public class BookListController implements Initializable{
         availabilityCol.setCellValueFactory(new PropertyValueFactory<>("available"));
 
         TableView<BookCopy> table = new TableView<>();
-      ObservableList<BookCopy> data
-                = FXCollections.observableArrayList();
+        ObservableList<BookCopy> data = FXCollections.observableArrayList();
 
         int i = 0;
-        for(BookCopy bc:book.getCopies()){
-            data.add(i++,bc);
+        for (BookCopy bc : book.getCopies()) {
+            data.add(i++, bc);
         }
 
         table.setItems(data);
@@ -175,9 +174,9 @@ public class BookListController implements Initializable{
         String css = this.getClass().getResource("book_list.css").toExternalForm();
         scene.getStylesheets().add(css);
 
-        ((Group) scene.getRoot()).getChildren().addAll(table);
+        ((Group)scene.getRoot()).getChildren().addAll(table);
         Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle(book.getTitle()+" copy list");
+        stage.setTitle(book.getTitle() + " copy list");
         stage.setScene(scene);
         stage.show();
     }
@@ -207,25 +206,24 @@ public class BookListController implements Initializable{
         TableView<Author> table = new TableView<>();
         table.setMinWidth(700);
 
-        ObservableList<Author> data
-                = FXCollections.observableArrayList();
+        ObservableList<Author> data = FXCollections.observableArrayList();
 
         int i = 0;
-        for(Author bc:book.getAuthors()){
-            data.add(i++,bc);
+        for (Author bc : book.getAuthors()) {
+            data.add(i++, bc);
         }
 
         table.setItems(data);
-        table.getColumns().addAll(firstNameCol, lastNameCol,phoneCol,addressCol,credentialsCol,bioCol);
+        table.getColumns().addAll(firstNameCol, lastNameCol, phoneCol, addressCol, credentialsCol, bioCol);
 
         Scene scene = new Scene(new Group());
 
         String css = this.getClass().getResource("book_list.css").toExternalForm();
         scene.getStylesheets().add(css);
 
-        ((Group) scene.getRoot()).getChildren().addAll(table);
+        ((Group)scene.getRoot()).getChildren().addAll(table);
         Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle(book.getTitle()+" author list");
+        stage.setTitle(book.getTitle() + " author list");
         stage.setScene(scene);
         stage.show();
     }
