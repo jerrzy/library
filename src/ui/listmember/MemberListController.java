@@ -14,10 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -40,6 +37,9 @@ public class MemberListController implements Initializable{
 
     @FXML
     private TableColumn memActionCol;
+
+    @FXML
+    private TextField searchMemberId;
 
     @Override
 
@@ -105,5 +105,28 @@ public class MemberListController implements Initializable{
         tableView.getItems().setAll(list);
     }
 
+
+    public void searchMember(){
+        String memberId = searchMemberId.getText();
+        if(memberId == null || memberId.trim().equals("")){
+            Utils.alertError("Alert","member id can not be empty!");
+            return;
+        }
+
+        DataAccess da = new DataAccessFacade();
+        LibraryMember member = da.findMemberById(memberId);
+
+        if(member == null){
+            Utils.alertError("Alert","member doesn't exist!");
+            return;
+        }
+
+        ObservableList<LibraryMember> list = FXCollections.observableArrayList();
+
+        list.add(0,member);
+
+        tableView.getItems().clear();
+        tableView.getItems().setAll(list);
+    }
 
 }

@@ -485,13 +485,13 @@ public class SystemController implements ControllerInterface{
     private void handleSearchRecords(ActionEvent event) {
         String memberId = checkoutRecordMemId.getText();
         if (isEmpty(memberId)) {
-            alertError("Alert", "member id can not be empty!");
+            Utils.alertError("Alert", "member id can not be empty!");
             return;
         }
         try {
             new CheckoutRecordService().showCheckoutRecords(memberId);
         } catch (LibrarySystemException e) {
-            alertError("ALert", e.getMessage());
+            Utils.alertError("ALert", e.getMessage());
             e.printStackTrace();
         }
 
@@ -610,10 +610,4 @@ public class SystemController implements ControllerInterface{
         return false;
     }
 
-    private void alertError(String head, String errorMsg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(head);
-        alert.setContentText(errorMsg);
-        alert.showAndWait();
-    }
 }
