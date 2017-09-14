@@ -20,8 +20,7 @@
                 <TableColumn fx:id="titleCol" prefWidth="75.0" text="Title"/>
                 <TableColumn fx:id="maxCheckoutLengthCol" prefWidth="75.0" text="maxCheckoutLength"/>
                 <TableColumn fx:id="numOfCopiesCol" prefWidth="75.0" text="the number of book copies"/>
-                <!--  <TableColumn fx:id="authorCol" prefWidth="75.0" text="Author" />
-                  <TableColumn fx:id="publisherCol" prefWidth="75.0" text="Publisher" />-->
+                 <TableColumn fx:id="authorCol" prefWidth="75.0" text="Author" />
                 <TableColumn fx:id="availabilityCol" prefWidth="75.0" text="Availability"/>
                 <TableColumn fx:id="actionCol" prefWidth="75.0" text="action"/>
 

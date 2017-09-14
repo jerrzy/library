@@ -38,4 +38,9 @@ public class Person implements Serializable {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+	public String getAddressStr() {
+		return getAddress().getStreet() + ",\n" + getAddress().getCity()
+				+ ",\n" + getAddress().getState() + ",\n" + getAddress().getZip();
+	}
 }

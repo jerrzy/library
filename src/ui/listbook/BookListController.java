@@ -1,7 +1,9 @@
 package ui.listbook;
 
+import business.Author;
 import business.Book;
 import business.BookCopy;
+import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 import javafx.collections.FXCollections;
@@ -45,8 +47,8 @@ public class BookListController implements Initializable{
     @FXML
     private TableColumn<Book, String> numOfCopiesCol;
 
-    //    @FXML
-    //    private TableColumn<Book, String> authorCol;
+        @FXML
+        private TableColumn authorCol;
     //    @FXML
     //    private TableColumn<Book, String> publisherCol;
     @FXML
@@ -66,12 +68,44 @@ public class BookListController implements Initializable{
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         maxCheckoutLengthCol.setCellValueFactory(new PropertyValueFactory<>("maxCheckoutLength"));
         numOfCopiesCol.setCellValueFactory(new PropertyValueFactory<>("numOfCopies"));
-        //        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+                authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+
+        Callback<TableColumn<Book, String>, TableCell<Book, String>> authorCellFactory = new Callback<TableColumn<Book, String>, TableCell<Book, String>>(){
+            @Override
+            public TableCell call(final TableColumn<Book, String> param) {
+                final TableCell<Book, String> cell = new TableCell<Book, String>(){
+
+                    final Button btn = new Button("Authors");
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            btn.setOnAction(event -> {
+                                Book book = getTableView().getItems().get(getIndex());
+                                showAuthors(book.getIsbn());
+                            });
+                            setGraphic(btn);
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+
+
+        };
+
+        authorCol.setCellFactory(authorCellFactory);
+
         //        publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         availabilityCol.setCellValueFactory(new PropertyValueFactory<>("availabilty"));
         actionCol.setCellValueFactory(new PropertyValueFactory<>("ggg"));
 
-        Callback<TableColumn<Book, String>, TableCell<Book, String>> cellFactory = new Callback<TableColumn<Book, String>, TableCell<Book, String>>(){
+        Callback<TableColumn<Book, String>, TableCell<Book, String>> actionCellFactory = new Callback<TableColumn<Book, String>, TableCell<Book, String>>(){
             @Override
             public TableCell call(final TableColumn<Book, String> param) {
                 final TableCell<Book, String> cell = new TableCell<Book, String>(){
@@ -99,7 +133,7 @@ public class BookListController implements Initializable{
             }
         };
 
-        actionCol.setCellFactory(cellFactory);
+        actionCol.setCellFactory(actionCellFactory);
     }
 
     private void loadData() {
@@ -143,7 +177,55 @@ public class BookListController implements Initializable{
 
         ((Group) scene.getRoot()).getChildren().addAll(table);
         Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle("book copy list");
+        stage.setTitle(book.getTitle()+" copy list");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void showAuthors(String isbn) {
+        DataAccess da = new DataAccessFacade();
+        Book book = da.findBookByIsbn(isbn);
+
+        TableColumn firstNameCol = new TableColumn("First Name");
+        firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+
+        TableColumn lastNameCol = new TableColumn("Last Name");
+        lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+
+        TableColumn phoneCol = new TableColumn("phone");
+        phoneCol.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+
+        TableColumn addressCol = new TableColumn("Address");
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+
+        TableColumn credentialsCol = new TableColumn("Credentials");
+        credentialsCol.setCellValueFactory(new PropertyValueFactory<>("credentials"));
+
+        TableColumn bioCol = new TableColumn("Bio");
+        bioCol.setCellValueFactory(new PropertyValueFactory<>("bio"));
+
+        TableView<Author> table = new TableView<>();
+        table.setMinWidth(700);
+
+        ObservableList<Author> data
+                = FXCollections.observableArrayList();
+
+        int i = 0;
+        for(Author bc:book.getAuthors()){
+            data.add(i++,bc);
+        }
+
+        table.setItems(data);
+        table.getColumns().addAll(firstNameCol, lastNameCol,phoneCol,addressCol,credentialsCol,bioCol);
+
+        Scene scene = new Scene(new Group());
+
+        String css = this.getClass().getResource("book_list.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
+        ((Group) scene.getRoot()).getChildren().addAll(table);
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle(book.getTitle()+" author list");
         stage.setScene(scene);
         stage.show();
     }

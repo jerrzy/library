@@ -74,8 +74,8 @@ public class MemberListController implements Initializable{
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
-                                LibraryMember book = getTableView().getItems().get(getIndex());
-                                showCheckoutRecords(book);
+                                LibraryMember member = getTableView().getItems().get(getIndex());
+                                showCheckoutRecords(member.getMemberId());
                             });
                             setGraphic(btn);
                             setText(null);
@@ -102,8 +102,12 @@ public class MemberListController implements Initializable{
         tableView.getItems().setAll(list);
     }
 
-    private void showCheckoutRecords(LibraryMember book) {
-        CheckoutRecord checkoutRecord = book.getCheckoutRecord();
+    private void showCheckoutRecords(String memberId) {
+        DataAccess da = new DataAccessFacade();
+
+       LibraryMember member = da.findMemberById(memberId);
+
+        CheckoutRecord checkoutRecord = member.getCheckoutRecord();
 
         TableColumn bookTitleCol = new TableColumn("Book Title");
         bookTitleCol.setCellValueFactory(new PropertyValueFactory<>("bookTile"));
@@ -141,7 +145,7 @@ public class MemberListController implements Initializable{
 
         ((Group)scene.getRoot()).getChildren().addAll(table);
         Stage stage = new Stage(StageStyle.DECORATED);
-        stage.setTitle("checkout records");
+        stage.setTitle(member.getFirstName()+" checkout records");
         stage.setScene(scene);
         stage.show();
     }

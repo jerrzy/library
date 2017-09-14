@@ -27,11 +27,6 @@ final public class LibraryMember extends Person implements Serializable{
         return checkoutRecord;
     }
 
-    public String getAddressStr() {
-        return getAddress().getStreet() + "\n" + getAddress().getCity()
-                + "\n" + getAddress().getState() + "\n" + getAddress().getZip();
-    }
-
     @Override
     public String toString() {
         return "Member Info: " + "ID: " + memberId + ", name: " + getFirstName() + " " + getLastName() + ", " + getTelephone() + " " + getAddress();
