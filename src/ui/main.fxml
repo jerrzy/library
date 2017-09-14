@@ -87,66 +87,105 @@
             </ImageView>
          </center>
          <right>
-            <VBox prefHeight="543.0" prefWidth="261.0" style="-fx-background-color: azure;" BorderPane.alignment="CENTER_RIGHT">
+            <VBox>
                <children>
-                  <Label text="Book ISBN">
-                     <VBox.margin>
-                        <Insets left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="checkInOutBookISBN" alignment="BOTTOM_LEFT">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </VBox.margin>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </padding>
-                  </TextField>
-                  <Label text="Member ID">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="checkInOutMemID" alignment="BOTTOM_LEFT">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </VBox.margin>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" />
-                     </padding>
-                  </TextField>
-                  <HBox prefHeight="94.0" prefWidth="196.0">
+                  <VBox prefHeight="327.0" prefWidth="261.0" style="-fx-background-color: azure;" BorderPane.alignment="CENTER_RIGHT">
                      <children>
-                        <Button id="checkout" alignment="CENTER" mnemonicParsing="false" onAction="#handleCheckOut" prefHeight="39.0" prefWidth="116.0" text="Check out">
-                           <HBox.margin>
+                        <Label text="Book ISBN">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button id="checkin" alignment="CENTER" mnemonicParsing="false" onAction="#handleCheckIn" prefHeight="39.0" prefWidth="116.0" text="Check in">
-                           <HBox.margin>
+                           </padding>
+                        </Label>
+                        <TextField fx:id="checkInOutBookISBN" alignment="BOTTOM_LEFT">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </VBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </padding>
+                        </TextField>
+                        <Label text="Member ID">
+                           <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </HBox.margin>
-                        </Button>
+                           </VBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="checkInOutMemID" alignment="BOTTOM_LEFT">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </VBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </padding>
+                        </TextField>
+                        <HBox prefHeight="126.0" prefWidth="261.0">
+                           <children>
+                              <Button id="checkout" alignment="CENTER" mnemonicParsing="false" onAction="#handleCheckOut" prefHeight="39.0" prefWidth="116.0" text="Check out">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button id="checkin" alignment="CENTER" mnemonicParsing="false" onAction="#handleCheckIn" prefHeight="39.0" prefWidth="116.0" text="Check in">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </VBox>
+                  <VBox prefHeight="209.0" prefWidth="261.0" style="-fx-background-color: azure;" BorderPane.alignment="CENTER_RIGHT">
+                     <children>
+                        <Label text="Member Id">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </Label>
+                        <TextField fx:id="checkoutRecordMemId" alignment="BOTTOM_LEFT" text="Member Id">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </VBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </padding>
+                        </TextField>
+                        <VBox alignment="CENTER" prefHeight="74.0" prefWidth="261.0">
+                           <children>
+                              <Button id="searchCheckoutRecords" alignment="CENTER" mnemonicParsing="false" onAction="#handleSearchRecords" prefHeight="39.0" prefWidth="116.0" text="search">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </right>

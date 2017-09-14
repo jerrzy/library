@@ -118,7 +118,13 @@ public class SystemController implements ControllerInterface{
     @FXML
     private TextField checkInOutMemID;
 
-   //////////////////////////////////////////////////////
+    /**
+     * checkoutRecordMemId
+     */
+    @FXML
+    private TextField checkoutRecordMemId;
+
+    //////////////////////////////////////////////////////
 
     /**
      * load window
@@ -405,6 +411,24 @@ public class SystemController implements ControllerInterface{
     }
     ///////////////////////////////////////////////////
 
+    /*
+    search records
+     */
+    @FXML
+    private void handleSearchRecords(ActionEvent event) {
+        String memberId = checkoutRecordMemId.getText();
+        if (isEmpty(memberId)) {
+            alertError("Alert", "member id can not be empty!");
+            return;
+        }
+        try {
+            new CheckoutRecordService().showCheckoutRecords(memberId);
+        } catch (LibrarySystemException e) {
+            alertError("ALert", e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
 
     public void login(String id, String password) throws LoginException {
         DataAccess da = new DataAccessFacade();
@@ -498,7 +522,7 @@ public class SystemController implements ControllerInterface{
 
         LocalDate dueDate = dateOfCheckout.plus(book.getMaxCheckoutLength(), ChronoUnit.DAYS);
 
-        member.getCheckoutRecord().addCheckoutRecordEntry(bookCopy,dateOfCheckout,dueDate);
+        member.getCheckoutRecord().addCheckoutRecordEntry(bookCopy, dateOfCheckout, dueDate);
 
         da.saveNewMember(member);
 
@@ -517,5 +541,12 @@ public class SystemController implements ControllerInterface{
         }
 
         return false;
+    }
+
+    private void alertError(String head, String errorMsg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(head);
+        alert.setContentText(errorMsg);
+        alert.showAndWait();
     }
 }
