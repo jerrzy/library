@@ -55,7 +55,7 @@ public class MemberListController implements Initializable{
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         mobileCol.setCellValueFactory(new PropertyValueFactory<>("telephone"));
-        addressCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("addressStr"));
 
         actionCol.setCellValueFactory(new PropertyValueFactory<>("ggg"));
 

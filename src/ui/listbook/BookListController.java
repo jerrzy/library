@@ -1,25 +1,14 @@
 package ui.listbook;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import business.Book;
 import business.BookCopy;
-import business.SystemController;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
@@ -30,6 +19,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class BookListController implements Initializable{
 
@@ -129,41 +123,6 @@ public class BookListController implements Initializable{
 
         TableColumn availabilityCol = new TableColumn("availability");
         availabilityCol.setCellValueFactory(new PropertyValueFactory<>("available"));
-
-//        TableColumn actionCol = new TableColumn("Action");
-//        actionCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
-
-//        Callback<TableColumn<Person, String>, TableCell<Person, String>> cellFactory
-//                = //
-//                new Callback<TableColumn<Person, String>, TableCell<Person, String>>() {
-//                    @Override
-//                    public TableCell call(final TableColumn<Person, String> param) {
-//                        final TableCell<Person, String> cell = new TableCell<Person, String>() {
-//
-//                            final Button btn = new Button("Just Do It");
-//
-//                            @Override
-//                            public void updateItem(String item, boolean empty) {
-//                                super.updateItem(item, empty);
-//                                if (empty) {
-//                                    setGraphic(null);
-//                                    setText(null);
-//                                } else {
-//                                    btn.setOnAction(event -> {
-//                                        Person person = getTableView().getItems().get(getIndex());
-//                                        System.out.println(person.getFirstName()
-//                                                + "   " + person.getLastName());
-//                                    });
-//                                    setGraphic(btn);
-//                                    setText(null);
-//                                }
-//                            }
-//                        };
-//                        return cell;
-//                    }
-//                };
-//
-//        actionCol.setCellFactory(cellFactory);
 
         TableView<BookCopy> table = new TableView<>();
       ObservableList<BookCopy> data
