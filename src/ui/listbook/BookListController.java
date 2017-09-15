@@ -157,16 +157,16 @@ public class BookListController implements Initializable{
         availabilityCol.setCellValueFactory(new PropertyValueFactory<>("available"));
 
         TableColumn borrowerIdCol = new TableColumn("borrower id");
-        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("borrowerId"));
+        borrowerIdCol.setCellValueFactory(new PropertyValueFactory<>("borrowerId"));
 
         TableColumn borrowerNameCol = new TableColumn("borrower name");
-        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("borrowerName"));
+        borrowerNameCol.setCellValueFactory(new PropertyValueFactory<>("borrowerName"));
 
         TableColumn checkoutDateCol = new TableColumn("checkout date");
-        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("checkoutDate"));
+        checkoutDateCol.setCellValueFactory(new PropertyValueFactory<>("checkoutDate"));
 
         TableColumn dueDateCol = new TableColumn("due date");
-        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        dueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
 
         TableView<BookCopyCheckoutEntry> table = new TableView<>();
         ObservableList<BookCopyCheckoutEntry> data = FXCollections.observableArrayList();
@@ -199,7 +199,10 @@ public class BookListController implements Initializable{
         }
 
         table.setItems(data);
-        table.getColumns().addAll(copyNumberCol, availabilityCol);
+        table.getColumns().addAll(copyNumberCol, availabilityCol,borrowerIdCol,
+                borrowerNameCol,checkoutDateCol,dueDateCol);
+
+        table.setMinWidth(700);
 
         Scene scene = new Scene(new Group());
 

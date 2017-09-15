@@ -32,14 +32,14 @@ public class BookCopyCheckoutEntry{
         return member == null ? "" : String.format("%s %s", member.getFirstName(), member.getLastName());
     }
 
-    public LocalDate getCheckoutDate() {
-        return checkoutRecordEntry == null ? LocalDate.of(1970, 1, 1) :
-                checkoutRecordEntry.getDateOfCheckout();
+    public String getCheckoutDate() {
+        return checkoutRecordEntry == null ?"":
+                checkoutRecordEntry.getDateOfCheckout().toString();
     }
 
-    public LocalDate getDueDate(){
-        return checkoutRecordEntry == null ? LocalDate.of(1970, 1, 1) :
-                checkoutRecordEntry.getDueDate();
+    public String getDueDate(){
+        return checkoutRecordEntry == null ? "" :
+                checkoutRecordEntry.getDueDate().toString();
     }
 
 }
