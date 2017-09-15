@@ -59,8 +59,8 @@
          <bottom>
             <HBox prefHeight="47.0" prefWidth="404.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="saveButton_AddMember" onAction="#addMember" prefHeight="66.0" prefWidth="250.0" stylesheets="@../addbook/addbook.css" text="Save" />
-                  <Button fx:id="cancelButton_AddMember" layoutX="10.0" layoutY="10.0" onAction="#cancel_AddMember" prefHeight="66.0" prefWidth="250.0" stylesheets="@../addbook/addbook.css" text="Cancel" />
+                  <Button fx:id="saveButton_AddMember" onAction="#addMember" prefHeight="66.0" prefWidth="250.0" stylesheets="@addmember.css" text="Save" />
+                  <Button fx:id="cancelButton_AddMember" layoutX="10.0" layoutY="10.0" onAction="#cancel_AddMember" prefHeight="66.0" prefWidth="250.0" stylesheets="@addmember.css" text="Cancel" />
                </children>
             </HBox>
          </bottom>
