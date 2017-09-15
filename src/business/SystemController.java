@@ -331,11 +331,7 @@ public class SystemController implements ControllerInterface{
         String state = state_AddMember.getText();
         String zip = zip_AddMember.getText();
 
-        Boolean flag = firstName.isEmpty() || lastName.isEmpty() || telephone.isEmpty() || street.isEmpty() || city.isEmpty() || state.isEmpty() || zip.isEmpty();
-        if (flag) {
-            AlertMaker.showErrorMessage("Can not add member", "Please Enter in all fields");
-            return;
-        }
+
         DataAccess c = DataAccessFactory.getInstance();
 
         //        String b = UUID.randomUUID().toString();
@@ -350,6 +346,7 @@ public class SystemController implements ControllerInterface{
         } catch (RuleException e) {
             Utils.alertError("", e.getMessage());
             e.printStackTrace();
+            return;
         }
 
         c.saveNewMember(a);
