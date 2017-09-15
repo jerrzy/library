@@ -31,7 +31,7 @@
          <left>
             <VBox prefHeight="445.0" prefWidth="154.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button id="addMemberButton" contentDisplay="TOP" onAction="#loadAddMember" prefHeight="150.0" prefWidth="154.0" text="Add Member">
+                  <Button id="addMemberButton" contentDisplay="TOP" onAction="#loadAddMemberView" prefHeight="150.0" prefWidth="154.0" text="Add Member">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -41,7 +41,7 @@
                      </graphic>
                   </Button>
                   <Button id="addBookButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#handleAddBookButton" prefHeight="150.0" prefWidth="154.0" text="Add Book" />
-                  <Button id="addBookCopyButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#loadAddBookCopy" prefHeight="150.0" prefWidth="154.0" text="Add Book Copy">
+                  <Button id="addBookCopyButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#loadAddBookCopyView" prefHeight="150.0" prefWidth="154.0" text="Add Book Copy">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -50,7 +50,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="loadMemberButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#loadMemberTable" prefHeight="150.0" prefWidth="154.0" text="View Members">
+                  <Button id="loadMemberButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#loadMemberView" prefHeight="150.0" prefWidth="154.0" text="View Members">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -59,7 +59,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="loadBookButton" contentDisplay="TOP" layoutX="10.0" layoutY="81.0" onAction="#loadBookTable" prefHeight="150.0" prefWidth="154.0" text="View Books">
+                  <Button id="loadBookButton" contentDisplay="TOP" layoutX="10.0" layoutY="81.0" onAction="#loadBookView" prefHeight="150.0" prefWidth="154.0" text="View Books">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -68,7 +68,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="logoutButton" contentDisplay="TOP" layoutX="10.0" layoutY="223.0" onAction="#handleLogoutButtonAction" prefHeight="150.0" prefWidth="154.0" text="logout">
+                  <Button id="logoutButton" contentDisplay="TOP" layoutX="10.0" layoutY="223.0" onAction="#handleLogoutButton" prefHeight="150.0" prefWidth="154.0" text="logout">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -138,7 +138,7 @@
                         </TextField>
                         <HBox prefHeight="126.0" prefWidth="261.0">
                            <children>
-                              <Button id="checkout" alignment="CENTER" mnemonicParsing="false" onAction="#handleCheckOut" prefHeight="39.0" prefWidth="116.0" text="Check out">
+                              <Button id="checkout" alignment="CENTER" mnemonicParsing="false" onAction="#handleCheckOutButton" prefHeight="39.0" prefWidth="116.0" text="Check out">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
