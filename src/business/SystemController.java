@@ -129,11 +129,11 @@ public class SystemController implements ControllerInterface{
      * load window
      */
     //////////////////////////////////////////////////////
-    private void loadMain() {
+    private void loadMainView() {
         loadWindow("/ui/main.fxml", "Library System");
     }
 
-    private void loadLoginWindow() {
+    private void loadLoginView() {
         loadWindow("/ui/login.fxml", "Library System");
     }
 
@@ -143,32 +143,32 @@ public class SystemController implements ControllerInterface{
     }
 
     @FXML
-    private void loadAddMember(ActionEvent event) {
+    private void loadAddMemberView(ActionEvent event) {
         loadWindow("/ui/addmember.fxml", "Add New Member");
     }
 
     @FXML
-    private void loadAddBook(ActionEvent event) {
+    private void loadAddBookView(ActionEvent event) {
         loadWindow("/ui/addbook.fxml", "Add New Book");
     }
     
     @FXML
-    private void loadAddAuthorWindow(ActionEvent event) {
+    private void loadAddAuthorView(ActionEvent event) {
         loadWindow("/ui/addauthor.fxml", "Add New Author");
     }
 
     @FXML
-    private void loadAddBookCopy(ActionEvent event) {
+    private void loadAddBookCopyView(ActionEvent event) {
         loadWindow("/ui/addbookCopy.fxml", "Add New Book Copy");
     }
     
     @FXML
-    private void loadMemberTable(ActionEvent event) {
+    private void loadMemberView(ActionEvent event) {
         loadWindow("/ui/listmember/member_list.fxml", "Member List");
     }
 
     @FXML
-    private void loadBookTable(ActionEvent event) {
+    private void loadBookView(ActionEvent event) {
         loadWindow("../ui/listbook/book_list.fxml", "Book List");
     }
 
@@ -223,7 +223,7 @@ public class SystemController implements ControllerInterface{
             return;
         }
         closeLoginWindow();
-        loadMain();
+        loadMainView();
     }
 
     private void applyPermission(Scene scene) {
@@ -256,24 +256,24 @@ public class SystemController implements ControllerInterface{
     }
 
     @FXML
-    private void handleLogoutButtonAction(ActionEvent event) {
+    private void handleAddBookButton(ActionEvent event){
+    	loadAddBookView(event);
+    }
+    
+    @FXML
+    private void handleLogoutButton(ActionEvent event) {
 
         //    	titleLabel_login.setText("Library System Login");
         //    	titleLabel_login.setStyle("-fx-background-color:black;-fx-text-fikll:white");
         logout();
 
         closeMainWindow();
-        loadLoginWindow();
+        loadLoginView();
     }
 
     @FXML
     private void handleAddAuthorButton(ActionEvent event){
-    	loadAddAuthorWindow(event);
-    }
-    
-    @FXML
-    private void handleAddBookButton(ActionEvent event){
-    	
+    	loadAddAuthorView(event);
     }
     
     @FXML
@@ -288,7 +288,7 @@ public class SystemController implements ControllerInterface{
      * @param event
      */
     @FXML
-    private void handleCancelButtonAction(ActionEvent event) {
+    private void handleLoginCancelButtonAction(ActionEvent event) {
         System.exit(0);
     }
 
@@ -359,7 +359,7 @@ public class SystemController implements ControllerInterface{
      * check out
      */
     @FXML
-    private void handleCheckOut(ActionEvent event) {
+    private void handleCheckOutButton(ActionEvent event) {
         String checkInOutBookISBNS = checkInOutBookISBN.getText();
         String checkInOutMemIDS = checkInOutMemID.getText();
         try {
