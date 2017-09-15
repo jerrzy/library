@@ -117,7 +117,7 @@ public class SystemController implements ControllerInterface{
     private TextField addAuthorState;
     @FXML
     private TextField addAuthorZip;
-    
+
     //////////////////////////////////////////////////////
     /*
      * checkoutRecordMemId
@@ -151,7 +151,7 @@ public class SystemController implements ControllerInterface{
     private void loadAddBookView(ActionEvent event) {
         loadWindow("/ui/addbook/addbook.fxml", "Add New Book");
     }
-    
+
     @FXML
     private void loadAddAuthorView(ActionEvent event) {
         loadWindow("/ui/addauthor.fxml", "Add New Author");
@@ -161,7 +161,7 @@ public class SystemController implements ControllerInterface{
     private void loadAddBookCopyView(ActionEvent event) {
         loadWindow("/ui/addbookCopy.fxml", "Add New Book Copy");
     }
-    
+
     @FXML
     private void loadMemberView(ActionEvent event) {
         loadWindow("/ui/listmember/member_list.fxml", "Member List");
@@ -256,10 +256,10 @@ public class SystemController implements ControllerInterface{
     }
 
     @FXML
-    private void handleAddBookButton(ActionEvent event){
-    	loadAddBookView(event);
+    private void handleAddBookButton(ActionEvent event) {
+        loadAddBookView(event);
     }
-    
+
     @FXML
     private void handleLogoutButton(ActionEvent event) {
 
@@ -272,11 +272,12 @@ public class SystemController implements ControllerInterface{
     }
 
     @FXML
-    private void handleCancelAddBookButton(ActionEvent event){
-    	
+    private void handleCancelAddBookButton(ActionEvent event) {
+
     }
-    
+
     //////////////////////////////////////////////////////////////////
+
     /**
      * handle login cancel
      *
@@ -332,7 +333,7 @@ public class SystemController implements ControllerInterface{
 
         Boolean flag = firstName.isEmpty() || lastName.isEmpty() || telephone.isEmpty() || street.isEmpty() || city.isEmpty() || state.isEmpty() || zip.isEmpty();
         if (flag) {
-            AlertMaker.showErrorMessage("Cant add member", "Please Enter in all fields");
+            AlertMaker.showErrorMessage("Can not add member", "Please Enter in all fields");
             return;
         }
         DataAccess c = DataAccessFactory.getInstance();
@@ -342,6 +343,14 @@ public class SystemController implements ControllerInterface{
 
         Address add = new Address(street, city, state, zip);
         LibraryMember a = new LibraryMember(b, firstName, lastName, telephone, add);
+
+        RuleSet ruleSet = RuleSetFactory.getRuleSet(LibraryMember.class);
+        try {
+            ruleSet.applyRules(a);
+        } catch (RuleException e) {
+            Utils.alertError("", e.getMessage());
+            e.printStackTrace();
+        }
 
         c.saveNewMember(a);
 
@@ -500,8 +509,8 @@ public class SystemController implements ControllerInterface{
 
         member.getCheckoutRecord().addCheckoutRecordEntry(bookCopy, dateOfCheckout, dueDate);
 
-        HashMap<String, String>  bcToMemberIdMap = da.readBookCopyToMember();
-        bcToMemberIdMap.put(Utils.getBookCopyUniqueKey(book,bookCopy),memberId);
+        HashMap<String, String> bcToMemberIdMap = da.readBookCopyToMember();
+        bcToMemberIdMap.put(Utils.getBookCopyUniqueKey(book, bookCopy), memberId);
 
         da.saveNewMember(member);
 
