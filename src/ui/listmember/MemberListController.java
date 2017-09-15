@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import business.*;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
+import dataaccess.DataAccessFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -94,7 +95,7 @@ public class MemberListController implements Initializable{
     private void loadData() { //
 
         // add members into list
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
         HashMap<String, LibraryMember> libraryMemberMap = da.readMemberMap();
         ObservableList<LibraryMember> list = FXCollections.observableArrayList();
         int i = 0;
@@ -113,7 +114,7 @@ public class MemberListController implements Initializable{
             return;
         }
 
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
         LibraryMember member = da.findMemberById(memberId);
 
         if(member == null){

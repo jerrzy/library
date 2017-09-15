@@ -10,4 +10,8 @@ public class Utils{
         alert.setContentText(errorMsg);
         alert.showAndWait();
     }
+
+    public static String getBookCopyUniqueKey(Book book, BookCopy bookCopy){
+        return String.format("%s_%d", book.getIsbn(), bookCopy.getCopyNum());
+    }
 }

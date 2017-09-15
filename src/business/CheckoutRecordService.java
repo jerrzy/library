@@ -2,6 +2,7 @@ package business;
 
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
+import dataaccess.DataAccessFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -17,7 +18,7 @@ public class CheckoutRecordService{
         if(isEmpty(memberId)){
             throw new LibrarySystemException("member id can not be empty!" );
         }
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
 
         LibraryMember member = da.findMemberById(memberId);
 

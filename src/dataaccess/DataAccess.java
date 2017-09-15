@@ -1,6 +1,7 @@
 package dataaccess;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import business.Book;
 import business.LibraryMember;
@@ -19,4 +20,7 @@ public interface DataAccess {
 	void saveBook(Book book);
 
 	Book findBookByIsbn(String isbn);
+
+	void saveBookCopyToMember(Map<String, String> bookCopyToMemberIdMap);
+	HashMap<String, String> readBookCopyToMember();
 }
