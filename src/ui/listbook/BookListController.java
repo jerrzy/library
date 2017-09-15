@@ -146,6 +146,7 @@ public class BookListController implements Initializable{
     }
 
     private void showCopies(String isbn) {
+        Map<String,String> dd = null;
         DataAccess da = DataAccessFactory.getInstance();
         Book book = da.findBookByIsbn(isbn);
 
@@ -172,8 +173,29 @@ public class BookListController implements Initializable{
 
         int i = 0;
         for (BookCopy bc : book.getCopies()) {
+            if (bc.isAvailable()) {
+                data.add(i++, new BookCopyCheckoutEntry(bc, null, null));
+            }else{
+                String bookCopyToMemberKey = Utils.getBookCopyUniqueKey(book,bc);
 
-            data.add(i++, bc);
+                if(dd == null){
+                    dd = da.readBookCopyToMember();
+                }
+
+                String memberId = dd.get(bookCopyToMemberKey);
+
+                LibraryMember member = da.findMemberById(memberId);
+
+                CheckoutRecordEntry checkoutRecordEntry = null;
+               for(CheckoutRecordEntry e: member.getCheckoutRecord().getCheckoutRecordEntries()){
+                   if(bc.getCopyNum() == e.getBookCopyNum() && book.getIsbn().equals(e.getBookIsbn())){
+                       checkoutRecordEntry = e;
+                       break;
+                   }
+               }
+
+                data.add(i++, new BookCopyCheckoutEntry(bc, member, checkoutRecordEntry));
+            }
         }
 
         table.setItems(data);

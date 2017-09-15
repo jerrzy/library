@@ -505,7 +505,12 @@ public class SystemController implements ControllerInterface{
 
         member.getCheckoutRecord().addCheckoutRecordEntry(bookCopy, dateOfCheckout, dueDate);
 
+        HashMap<String, String>  bcToMemberIdMap = da.readBookCopyToMember();
+        bcToMemberIdMap.put(Utils.getBookCopyUniqueKey(book,bookCopy),memberId);
+
         da.saveNewMember(member);
+
+        da.saveBookCopyToMember(bcToMemberIdMap);
 
         da.saveBook(book);
     }
