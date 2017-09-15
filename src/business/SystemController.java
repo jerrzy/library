@@ -137,41 +137,48 @@ public class SystemController implements ControllerInterface{
         loadWindow("/ui/login.fxml", "Library System");
     }
 
+    @FXML
     private void loadLoginView(ActionEvent event) {
         loadWindow("/ui/login.fxml", "login");
     }
 
+    @FXML
     private void loadAddMemberView(ActionEvent event) {
         loadWindow("/ui/addmember.fxml", "Add New Member");
     }
 
+    @FXML
     private void loadAddBookView(ActionEvent event) {
         loadWindow("/ui/addbook/addbook.fxml", "Add New Book");
     }
     
-    public void loadAddAuthorView(ActionEvent event) {
+    @FXML
+    private void loadAddAuthorView(ActionEvent event) {
         loadWindow("/ui/addauthor.fxml", "Add New Author");
     }
 
-    public void loadAddBookCopyView(ActionEvent event) {
+    @FXML
+    private void loadAddBookCopyView(ActionEvent event) {
         loadWindow("/ui/addbookCopy.fxml", "Add New Book Copy");
     }
     
-    public void loadMemberView(ActionEvent event) {
+    @FXML
+    private void loadMemberView(ActionEvent event) {
         loadWindow("/ui/listmember/member_list.fxml", "Member List");
     }
 
-    public void loadBookView(ActionEvent event) {
+    @FXML
+    private void loadBookView(ActionEvent event) {
         loadWindow("../ui/listbook/book_list.fxml", "Book List");
     }
 
-    public void closeMainWindow() {
+    private void closeMainWindow() {
         if (mainRootPane != null) {
             ((Stage)mainRootPane.getScene().getWindow()).close();
         }
     }
 
-    public void closeLoginWindow() {
+    private void closeLoginWindow() {
         if (anchorPane_login != null) {
             ((Stage)anchorPane_login.getScene().getWindow()).close();
         }

@@ -7,7 +7,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import ui.addauthor.AddAuthorController;
 
 public class AddBookController {
 	
@@ -33,7 +32,7 @@ public class AddBookController {
 
     @FXML
     private void handleAddAuthorButton(ActionEvent event){
-    	systemController.loadAddAuthorView(event);
+    	systemController.loadWindow("/ui/addauthor.fxml", "Add New Author");
     }
     
     public void addAuthors(String authorName) {
