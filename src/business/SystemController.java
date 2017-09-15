@@ -137,54 +137,47 @@ public class SystemController implements ControllerInterface{
         loadWindow("/ui/login.fxml", "Library System");
     }
 
-    @FXML
     private void loadLoginView(ActionEvent event) {
         loadWindow("/ui/login.fxml", "login");
     }
 
-    @FXML
     private void loadAddMemberView(ActionEvent event) {
         loadWindow("/ui/addmember.fxml", "Add New Member");
     }
 
-    @FXML
     private void loadAddBookView(ActionEvent event) {
-        loadWindow("/ui/addbook.fxml", "Add New Book");
+        loadWindow("/ui/addbook/addbook.fxml", "Add New Book");
     }
     
-    @FXML
-    private void loadAddAuthorView(ActionEvent event) {
+    public void loadAddAuthorView(ActionEvent event) {
         loadWindow("/ui/addauthor.fxml", "Add New Author");
     }
 
-    @FXML
-    private void loadAddBookCopyView(ActionEvent event) {
+    public void loadAddBookCopyView(ActionEvent event) {
         loadWindow("/ui/addbookCopy.fxml", "Add New Book Copy");
     }
     
-    @FXML
-    private void loadMemberView(ActionEvent event) {
+    public void loadMemberView(ActionEvent event) {
         loadWindow("/ui/listmember/member_list.fxml", "Member List");
     }
 
-    @FXML
-    private void loadBookView(ActionEvent event) {
+    public void loadBookView(ActionEvent event) {
         loadWindow("../ui/listbook/book_list.fxml", "Book List");
     }
 
-    private void closeMainWindow() {
+    public void closeMainWindow() {
         if (mainRootPane != null) {
             ((Stage)mainRootPane.getScene().getWindow()).close();
         }
     }
 
-    private void closeLoginWindow() {
+    public void closeLoginWindow() {
         if (anchorPane_login != null) {
             ((Stage)anchorPane_login.getScene().getWindow()).close();
         }
     }
 
-    void loadWindow(String loc, String title) {
+    public void loadWindow(String loc, String title) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(loc));
 
@@ -271,11 +264,6 @@ public class SystemController implements ControllerInterface{
         loadLoginView();
     }
 
-    @FXML
-    private void handleAddAuthorButton(ActionEvent event){
-    	loadAddAuthorView(event);
-    }
-    
     @FXML
     private void handleCancelAddBookButton(ActionEvent event){
     	
