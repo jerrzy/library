@@ -165,7 +165,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="checkoutRecordMemId" alignment="BOTTOM_LEFT" text="Member Id">
+                        <TextField fx:id="checkoutRecordMemId" alignment="BOTTOM_LEFT" promptText="Member Id">
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" />
                            </VBox.margin>
@@ -178,7 +178,7 @@
                         </TextField>
                         <VBox alignment="CENTER" prefHeight="74.0" prefWidth="261.0">
                            <children>
-                              <Button id="searchCheckoutRecords" alignment="CENTER" mnemonicParsing="false" onAction="#handleSearchRecords" prefHeight="39.0" prefWidth="116.0" text="search">
+                              <Button id="searchCheckoutRecords" alignment="CENTER" mnemonicParsing="false" onAction="#handleSearchRecords" prefHeight="39.0" prefWidth="116.0" text="checkout records">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>

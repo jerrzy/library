@@ -10,10 +10,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import dataaccess.Auth;
-import dataaccess.DataAccess;
-import dataaccess.DataAccessFacade;
-import dataaccess.User;
+
+import dataaccess.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -97,6 +95,29 @@ public class SystemController implements ControllerInterface{
     private TextField checkInOutBookISBN;
     @FXML
     private TextField checkInOutMemID;
+
+    /**
+     * add author UI
+     */
+    @FXML
+    private TextField addAuthorFirstName;
+    @FXML
+    private TextField addAuthorLastName;
+    @FXML
+    private TextField addAuthorTelephone;
+    @FXML
+    private TextField addAuthorCredentials;
+    @FXML
+    private TextField addAuthorBIO;
+    @FXML
+    private TextField addAuthorStreet;
+    @FXML
+    private TextField addAuthorCity;
+    @FXML
+    private TextField addAuthorState;
+    @FXML
+    private TextField addAuthorZip;
+    
     //////////////////////////////////////////////////////
     /*
      * checkoutRecordMemId
@@ -319,7 +340,7 @@ public class SystemController implements ControllerInterface{
             AlertMaker.showErrorMessage("Cant add member", "Please Enter in all fields");
             return;
         }
-        DataAccessFacade c = new DataAccessFacade();
+        DataAccess c = DataAccessFactory.getInstance();
 
         //        String b = UUID.randomUUID().toString();
         String b = c.getUniqueId();
@@ -378,20 +399,20 @@ public class SystemController implements ControllerInterface{
     private void handleSearchRecords(ActionEvent event) {
         String memberId = checkoutRecordMemId.getText();
         if (isEmpty(memberId)) {
-            alertError("Alert", "member id can not be empty!");
+            Utils.alertError("Alert", "member id can not be empty!");
             return;
         }
         try {
             new CheckoutRecordService().showCheckoutRecords(memberId);
         } catch (LibrarySystemException e) {
-            alertError("ALert", e.getMessage());
+            Utils.alertError("ALert", e.getMessage());
             e.printStackTrace();
         }
 
     }
 
     public void login(String id, String password) throws LoginException {
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
         HashMap<String, User> map = da.readUserMap();
         if (!map.containsKey(id)) {
             throw new LoginException("ID " + id + " not found");
@@ -409,7 +430,7 @@ public class SystemController implements ControllerInterface{
 
     @Override
     public List<String> allMemberIds() {
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
         List<String> retval = new ArrayList<>();
         retval.addAll(da.readMemberMap().keySet());
         return retval;
@@ -417,7 +438,7 @@ public class SystemController implements ControllerInterface{
 
     @Override
     public List<String> allBookIds() {
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
         List<String> retval = new ArrayList<>();
         retval.addAll(da.readBooksMap().keySet());
         return retval;
@@ -432,7 +453,7 @@ public class SystemController implements ControllerInterface{
         if (isEmpty(isbn)) {
             throw new LibrarySystemException("isbn can not be empty!");
         }
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
 
         Book book = da.findBookByIsbn(isbn);
 
@@ -458,7 +479,7 @@ public class SystemController implements ControllerInterface{
             throw new LibrarySystemException("isbn can not be empty!");
         }
 
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
 
         LibraryMember member = da.findMemberById(memberId);
         if (member == null) {
@@ -503,10 +524,4 @@ public class SystemController implements ControllerInterface{
         return false;
     }
 
-    private void alertError(String head, String errorMsg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(head);
-        alert.setContentText(errorMsg);
-        alert.showAndWait();
-    }
 }

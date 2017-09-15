@@ -1,20 +1,16 @@
 package ui.listbook;
 
-import business.Author;
-import business.Book;
-import business.BookCopy;
+import business.*;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
+import dataaccess.DataAccessFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -52,6 +48,9 @@ public class BookListController implements Initializable{
 
     @FXML
     private TableColumn bookActionCol;
+
+    @FXML
+    private TextField searchBookId;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -133,7 +132,7 @@ public class BookListController implements Initializable{
     }
 
     private void loadData() {
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
 
         ObservableList<Book> bookList = FXCollections.observableArrayList();
 
@@ -147,20 +146,33 @@ public class BookListController implements Initializable{
     }
 
     private void showCopies(String isbn) {
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
         Book book = da.findBookByIsbn(isbn);
 
-        TableColumn copyNumberCol = new TableColumn("Book Copy number");
+        TableColumn copyNumberCol = new TableColumn("Copy number");
         copyNumberCol.setCellValueFactory(new PropertyValueFactory<>("copyNum"));
 
         TableColumn availabilityCol = new TableColumn("availability");
         availabilityCol.setCellValueFactory(new PropertyValueFactory<>("available"));
 
-        TableView<BookCopy> table = new TableView<>();
-        ObservableList<BookCopy> data = FXCollections.observableArrayList();
+        TableColumn borrowerIdCol = new TableColumn("borrower id");
+        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("borrowerId"));
+
+        TableColumn borrowerNameCol = new TableColumn("borrower name");
+        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("borrowerName"));
+
+        TableColumn checkoutDateCol = new TableColumn("checkout date");
+        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("checkoutDate"));
+
+        TableColumn dueDateCol = new TableColumn("due date");
+        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+
+        TableView<BookCopyCheckoutEntry> table = new TableView<>();
+        ObservableList<BookCopyCheckoutEntry> data = FXCollections.observableArrayList();
 
         int i = 0;
         for (BookCopy bc : book.getCopies()) {
+
             data.add(i++, bc);
         }
 
@@ -180,7 +192,7 @@ public class BookListController implements Initializable{
     }
 
     private void showAuthors(String isbn) {
-        DataAccess da = new DataAccessFacade();
+        DataAccess da = DataAccessFactory.getInstance();
         Book book = da.findBookByIsbn(isbn);
 
         TableColumn firstNameCol = new TableColumn("First Name");
@@ -224,5 +236,29 @@ public class BookListController implements Initializable{
         stage.setTitle(book.getTitle() + " author bookList");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void searchBook() {
+        String isbn = searchBookId.getText();
+
+        if (isbn == null || isbn.trim().equals("")) {
+            Utils.alertError("Alert", "ISBN can not be empty!");
+            return;
+        }
+
+        DataAccess da = DataAccessFactory.getInstance();
+        Book member = da.findBookByIsbn(isbn);
+
+        if (member == null) {
+            Utils.alertError("Alert", "Book doesn't exist!");
+            return;
+        }
+
+        ObservableList<Book> list = FXCollections.observableArrayList();
+
+        list.add(0, member);
+
+        bookTableView.getItems().clear();
+        bookTableView.getItems().setAll(list);
     }
 }

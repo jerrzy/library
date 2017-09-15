@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import business.Book;
 import business.BookCopy;
@@ -19,11 +20,13 @@ import dataaccess.DataAccessFacade.StorageType;
 public class DataAccessFacade implements DataAccess{
 
     enum StorageType{
-        BOOKS, MEMBERS, USERS, UNIQUEID;
+        BOOKS, MEMBERS, USERS, UNIQUEID, BOOKCOPYTOMEMBERID;
     }
 
     public static final String OUTPUT_DIR = System.getProperty("user.dir") + "/src/dataaccess/storage";
     public static final String DATE_PATTERN = "MM/dd/yyyy";
+
+    DataAccessFacade(){}
 
     @Override
     public String getUniqueId() {
@@ -61,6 +64,18 @@ public class DataAccessFacade implements DataAccess{
         Book book = isbnBookMap.get(isbn);
 
         return book;
+    }
+
+    @Override
+    public void saveBookCopyToMember(Map<String, String> bookCopyToMemberIdMap) {
+        saveToStorage(StorageType.BOOKCOPYTOMEMBERID, bookCopyToMemberIdMap);
+    }
+
+    @Override
+    public HashMap<String, String> readBookCopyToMember() {
+        //Returns a Map with name/value pairs being
+        //   isbn_copynum -> memberid
+        return (HashMap<String, String>)readFromStorage(StorageType.BOOKCOPYTOMEMBERID);
     }
 
 

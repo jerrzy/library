@@ -5,10 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import business.*;
 
@@ -74,7 +71,8 @@ public class TestData {
 //		System.out.println(da.readBooksMap());
 //		System.out.println(da.readUserMap());
 
-        td.initUniqueId();
+//        td.initUniqueId();
+		td.loadBookCopyToMemberId();
 	}
 
 	public void initUniqueId(){
@@ -127,5 +125,26 @@ public class TestData {
 		
 	}
 		
-	
+
+	public void loadBookCopyToMemberId(){
+		DataAccess da =DataAccessFactory.getInstance();
+
+		HashMap<String,LibraryMember> idMemberMap = da.readMemberMap();
+
+		Map<String,String> bookCopyToMemberIdMap = new HashMap<>();
+
+		for(Map.Entry<String,LibraryMember> e:idMemberMap.entrySet()){
+			LibraryMember member = e.getValue();
+			List<CheckoutRecordEntry> checkoutRecordEntries = member.getCheckoutRecord().getCheckoutRecordEntries();
+
+			for(CheckoutRecordEntry cte:checkoutRecordEntries){
+				bookCopyToMemberIdMap.put(Utils.getBookCopyUniqueKey(cte.getBookCopy().getBook(),cte.getBookCopy()),
+						member.getMemberId());
+			}
+
+		}
+
+		DataAccessFactory.getInstance().saveBookCopyToMember(bookCopyToMemberIdMap);
+
+	}
 }
