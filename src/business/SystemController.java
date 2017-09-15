@@ -149,7 +149,7 @@ public class SystemController implements ControllerInterface{
 
     @FXML
     private void loadAddBookView(ActionEvent event) {
-        loadWindow("/ui/addbook.fxml", "Add New Book");
+        loadWindow("/ui/addbook/addbook.fxml", "Add New Book");
     }
     
     @FXML
@@ -184,7 +184,7 @@ public class SystemController implements ControllerInterface{
         }
     }
 
-    void loadWindow(String loc, String title) {
+    public void loadWindow(String loc, String title) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(loc));
 
@@ -271,11 +271,6 @@ public class SystemController implements ControllerInterface{
         loadLoginView();
     }
 
-    @FXML
-    private void handleAddAuthorButton(ActionEvent event){
-    	loadAddAuthorView(event);
-    }
-    
     @FXML
     private void handleCancelAddBookButton(ActionEvent event){
     	

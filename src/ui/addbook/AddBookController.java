@@ -1,16 +1,17 @@
 package ui.addbook;
 
+import business.SystemController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import ui.addauthor.AddAuthorController;
 
 public class AddBookController {
 	
-//	private final AddAuthorController addAuthorController;
+	private final SystemController systemController;
+	
     /**
      * add book UI
      */
@@ -24,11 +25,16 @@ public class AddBookController {
     private TextField newBookAuthors;
     
     
-//    public AddBookController(AddAuthorController addAuthorController) {
-//		super();
-//		this.addAuthorController = addAuthorController;
-//	}
+    public AddBookController(SystemController systemController) {
+		super();
+		this.systemController = systemController;
+	}
 
+    @FXML
+    private void handleAddAuthorButton(ActionEvent event){
+    	systemController.loadWindow("/ui/addauthor.fxml", "Add New Author");
+    }
+    
     public void addAuthors(String authorName) {
     	String curAuthors = newBookAuthors.getText();
     	newBookAuthors.setText(curAuthors + ","+ authorName);
