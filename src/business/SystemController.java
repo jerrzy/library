@@ -70,6 +70,8 @@ public class SystemController implements ControllerInterface{
      * add member UI
      */
     @FXML
+    private AnchorPane anchorPane_addMember;
+    @FXML
     private TextField firstName_AddMember;
     @FXML
     private TextField lastName_AddMember;
@@ -319,6 +321,8 @@ public class SystemController implements ControllerInterface{
      */
     @FXML
     private void cancel_AddMember(ActionEvent event) {
+        Stage stage = (Stage)anchorPane_addMember.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
