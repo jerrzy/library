@@ -61,18 +61,6 @@ public class SystemController implements ControllerInterface{
     private Label titleLabel_login;
 
     /**
-     * add book UI
-     */
-    @FXML
-    private AnchorPane rootPane_AddBook;
-    @FXML
-    private TextField newBookTitle;
-    @FXML
-    private TextField newBookISBN;
-    @FXML
-    private TextField newBookAuthors;
-
-    /**
      * add book copy UI
      */
     @FXML
@@ -109,29 +97,6 @@ public class SystemController implements ControllerInterface{
     private TextField checkInOutBookISBN;
     @FXML
     private TextField checkInOutMemID;
-
-    /**
-<<<<<<< HEAD
-     * add author UI
-     */
-    @FXML
-    private TextField addAuthorFirstName;
-    @FXML
-    private TextField addAuthorLastName;
-    @FXML
-    private TextField addAuthorTelephone;
-    @FXML
-    private TextField addAuthorCredentials;
-    @FXML
-    private TextField addAuthorBIO;
-    @FXML
-    private TextField addAuthorStreet;
-    @FXML
-    private TextField addAuthorCity;
-    @FXML
-    private TextField addAuthorState;
-    @FXML
-    private TextField addAuthorZip;
     //////////////////////////////////////////////////////
     /*
      * checkoutRecordMemId
@@ -212,7 +177,6 @@ public class SystemController implements ControllerInterface{
             Logger.getLogger(SystemController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     /////////////////////////////////////////////////////////////////
 
     /**
@@ -281,15 +245,6 @@ public class SystemController implements ControllerInterface{
         loadLoginWindow();
     }
 
-    /**
-     * show add book window 
-     * @param event
-     */
-    @FXML
-    private void handleAddBook(ActionEvent event){
-    	loadAddBook(event);
-    }
-    
     @FXML
     private void handleAddAuthorButton(ActionEvent event){
     	loadAddAuthorWindow(event);
@@ -307,31 +262,6 @@ public class SystemController implements ControllerInterface{
     
     //////////////////////////////////////////////////////////////////
     /**
-     * retrieve an author
-     * @param event
-     */
-    @FXML
-    private void retrieveAuthor(ActionEvent event){
-    	
-    }
-    
-    /**
-     * add an author to a book
-     * @param event
-     */
-    @FXML
-    private void addAuthor(ActionEvent event){
-    	String currentAuthors = newBookAuthors.getText();
-    	String newAuthorFirstName = addAuthorFirstName.getText();
-    	String newAuthorLastName = addAuthorLastName.getText();
-    	newBookAuthors.setText(currentAuthors + "," + newAuthorFirstName + " " + newAuthorLastName);
-    }
-    
-    @FXML
-    private void cancelAddAuthor(ActionEvent event){
-    	
-    }
-    /**
      * handle login cancel
      *
      * @param event
@@ -339,32 +269,6 @@ public class SystemController implements ControllerInterface{
     @FXML
     private void handleCancelButtonAction(ActionEvent event) {
         System.exit(0);
-    }
-
-    /**
-     * handle addBook button
-     *
-     * @param event
-     */
-    @FXML
-    private void addBook(ActionEvent event) {
-
-        String bookID = newBookISBN.getText();
-        String bookAuthor = newBookAuthors.getText();
-        String bookName = newBookTitle.getText();
-
-        if (bookID.isEmpty() || bookAuthor.isEmpty() || bookName.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please Enter in all fields");
-            alert.showAndWait();
-            return;
-        }
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setContentText("Success");
-        alert.showAndWait();
     }
 
     @FXML
@@ -385,17 +289,6 @@ public class SystemController implements ControllerInterface{
         alert.setHeaderText(null);
         alert.setContentText("Success");
         alert.showAndWait();
-    }
-
-    /**
-     * handle addBook cancel
-     *
-     * @param event
-     */
-    @FXML
-    private void cancel(ActionEvent event) {
-        Stage stage = (Stage)rootPane_AddBook.getScene().getWindow();
-        stage.close();
     }
 
     @FXML
