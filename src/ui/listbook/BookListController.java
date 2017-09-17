@@ -193,8 +193,11 @@ public class BookListController implements Initializable{
                        break;
                    }
                }
+                BookCopyCheckoutEntry b = new BookCopyCheckoutEntry(bc, member, checkoutRecordEntry);
+                System.out.println(b.toString());
 
-                data.add(i++, new BookCopyCheckoutEntry(bc, member, checkoutRecordEntry));
+                data.add(i++,b);
+
             }
         }
 
