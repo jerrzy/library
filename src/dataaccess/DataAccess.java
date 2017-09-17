@@ -1,8 +1,10 @@
 package dataaccess;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import business.Author;
 import business.Book;
 import business.LibraryMember;
 import dataaccess.DataAccessFacade.StorageType;
@@ -23,4 +25,7 @@ public interface DataAccess {
 
 	void saveBookCopyToMember(Map<String, String> bookCopyToMemberIdMap);
 	HashMap<String, String> readBookCopyToMember();
+
+	void save(Author author);
+	List<Author> readAUthors();
 }

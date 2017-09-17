@@ -8,25 +8,30 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import business.Author;
 import business.Book;
 import business.BookCopy;
 import business.LibraryMember;
 import dataaccess.DataAccessFacade.StorageType;
 
+import javax.swing.undo.AbstractUndoableEdit;
+
 
 public class DataAccessFacade implements DataAccess{
 
     enum StorageType{
-        BOOKS, MEMBERS, USERS, UNIQUEID, BOOKCOPYTOMEMBERID;
+        BOOKS, MEMBERS, USERS, UNIQUEID, BOOKCOPYTOMEMBERID, AUTHORS;
     }
 
     public static final String OUTPUT_DIR = System.getProperty("user.dir") + "/src/dataaccess/storage";
     public static final String DATE_PATTERN = "MM/dd/yyyy";
 
-    DataAccessFacade(){}
+    DataAccessFacade() {
+    }
 
     @Override
     public String getUniqueId() {
@@ -107,6 +112,19 @@ public class DataAccessFacade implements DataAccess{
         return (HashMap<String, User>)readFromStorage(StorageType.USERS);
     }
 
+    public void save(Author author) {
+        List<Author> authors = readAUthors();
+        authors.add(author);
+
+        saveToStorage(StorageType.AUTHORS, authors);
+    }
+
+    public List<Author> readAUthors() {
+        List<Author> authors = (LinkedList)readFromStorage(StorageType.AUTHORS);
+
+        return authors;
+    }
+
 
     /////load methods - these place test data into the storage area
     ///// - used just once at startup
@@ -132,6 +150,13 @@ public class DataAccessFacade implements DataAccess{
 
     static void loadUniqueId(Integer id) {
         saveToStorage(StorageType.UNIQUEID, id);
+    }
+
+    static void loadAuthors(List<Author> authorList) {
+        if (authorList == null) {
+            authorList = new LinkedList<>();
+        }
+        saveToStorage(StorageType.AUTHORS, authorList);
     }
 
     static void saveToStorage(StorageType type, Object ob) {
