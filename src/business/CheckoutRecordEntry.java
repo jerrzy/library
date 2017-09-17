@@ -41,5 +41,17 @@ public class CheckoutRecordEntry implements Serializable{
         return this.bookCopy.getCopyNum();
     }
 
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(getBookTile()).append("\t");
+        sb.append(getBookIsbn()).append("\t");
+        sb.append(getBookCopyNum()).append("\t");
+        sb.append(getDateOfCheckout()).append("\t");
+        sb.append(getDueDate()).append("\t");
+
+        return sb.toString();
+    }
 
 }

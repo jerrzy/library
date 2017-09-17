@@ -52,6 +52,7 @@ public class CheckoutRecordService{
         int i = 0;
         for (CheckoutRecordEntry bc : checkoutRecord.getCheckoutRecordEntries()) {
             data.add(i++, bc);
+            System.out.println(bc.toString());
         }
 
         table.setItems(data);
