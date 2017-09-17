@@ -113,16 +113,17 @@ public class DataAccessFacade implements DataAccess{
     }
 
     public void save(Author author) {
-        List<Author> authors = readAUthors();
-        authors.add(author);
+        HashMap<String, Author> idAuthorMap = readAUthors();
+        idAuthorMap.put(author.getAuthorId(), author);
 
-        saveToStorage(StorageType.AUTHORS, authors);
+        saveToStorage(StorageType.AUTHORS, idAuthorMap);
     }
 
-    public List<Author> readAUthors() {
-        List<Author> authors = (LinkedList)readFromStorage(StorageType.AUTHORS);
+    public HashMap<String, Author> readAUthors() {
+        // authorId -> author
+        HashMap<String, Author> idAuthorMap = (HashMap<String, Author>)readFromStorage(StorageType.AUTHORS);
 
-        return authors;
+        return idAuthorMap;
     }
 
 
@@ -152,11 +153,11 @@ public class DataAccessFacade implements DataAccess{
         saveToStorage(StorageType.UNIQUEID, id);
     }
 
-    static void loadAuthors(List<Author> authorList) {
-        if (authorList == null) {
-            authorList = new LinkedList<>();
-        }
-        saveToStorage(StorageType.AUTHORS, authorList);
+    static void loadAuthors(List<Author> authors) {
+        HashMap<String,Author> idAuthorMap = new HashMap<>();
+
+        authors.forEach(author -> idAuthorMap.put(author.getAuthorId(), author));
+        saveToStorage(StorageType.AUTHORS, idAuthorMap);
     }
 
     static void saveToStorage(StorageType type, Object ob) {

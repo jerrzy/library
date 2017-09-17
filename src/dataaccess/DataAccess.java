@@ -27,5 +27,5 @@ public interface DataAccess {
 	HashMap<String, String> readBookCopyToMember();
 
 	void save(Author author);
-	List<Author> readAUthors();
+    HashMap<String, Author> readAUthors();
 }
