@@ -35,7 +35,7 @@
                         <Insets left="10.0" top="20.0" />
                      </HBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" onAction="#handleAddAuthorButton" text="Add">
+                  <Button mnemonicParsing="false" onAction="#handleAddAuthorButton" prefHeight="30.0" prefWidth="80.0" text="Add">
                      <HBox.margin>
                         <Insets top="20.0" />
                      </HBox.margin>
@@ -43,13 +43,13 @@
                </children>
             </HBox>
             <HBox prefHeight="47.0" prefWidth="404.0">
-               <children>
-                  <Button onAction="#confirmAddBook" prefHeight="66.0" prefWidth="250.0" text="Save" />
-                  <Button layoutX="10.0" layoutY="10.0" onAction="#cancelAddBook" prefHeight="66.0" prefWidth="250.0" text="Cancel" />
-               </children>
                <VBox.margin>
                   <Insets top="25.0" />
                </VBox.margin>
+               <children>
+                  <Button onAction="#confirmAddBook" prefHeight="66.0" prefWidth="250.0" text="Save" />
+                  <Button onAction="#cancelAddBook" prefHeight="66.0" prefWidth="250.0" text="Cancel" />
+               </children>
             </HBox>
          </children>
       </VBox>

@@ -40,7 +40,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="addAuthorButton" mnemonicParsing="false" onAction="#handleAddAuthorButton" prefHeight="150.0" prefWidth="154.0" text="Add Author">
+                  <Button id="addAuthorButton" mnemonicParsing="false" onAction="#loadAddAuthorView" prefHeight="150.0" prefWidth="154.0" text="Add Author">
                   <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -49,7 +49,15 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button id="addBookButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#handleAddBookButton" prefHeight="150.0" prefWidth="154.0" text="Add Book" />
+                  <Button id="addBookButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#loadAddBookView" prefHeight="150.0" prefWidth="154.0" text="Add Book">
+                  <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/ui/icons/add_book.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                   <Button id="addBookCopyButton" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" onAction="#loadAddBookCopyView" prefHeight="150.0" prefWidth="154.0" text="Add Book Copy">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">

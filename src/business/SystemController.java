@@ -132,50 +132,50 @@ public class SystemController implements ControllerInterface{
      */
     //////////////////////////////////////////////////////
     private void loadMainView() {
-        loadWindow("/ui/main.fxml", "Library System");
-    }
-
-    private void loadLoginView() {
-        loadWindow("/ui/login.fxml", "Library System");
+        Scene scene = loadWindow("/ui/main.fxml", "Library System", this.getClass());
+        if(scene != null){
+        	applyPermission(scene);
+        }
     }
 
     @FXML
-    private void loadLoginView(ActionEvent event) {
-        loadWindow("/ui/login.fxml", "login");
+    private void loadLoginView() {
+        loadWindow("/ui/login.fxml", "Library System", this.getClass());
     }
 
+    @FXML
     private void loadAddAuthorWIndow() {
-        loadWindow("/ui/addauthor/addauthor.fxml", "Add Author");
+        loadWindow("/ui/addauthor/addauthor.fxml", "Add Author", this.getClass());
     }
     
     @FXML
     private void loadAddMemberView(ActionEvent event) {
-        loadWindow("/ui/addmember.fxml", "Add New Member");
+        loadWindow("/ui/addmember.fxml", "Add New Member", this.getClass());
     }
 
     @FXML
     private void loadAddBookView(ActionEvent event) {
-        loadWindow("/ui/addbook/addbook.fxml", "Add New Book");
+        loadWindow("/ui/addbook/addbook.fxml", "Add New Book", this.getClass());
     }
 
     @FXML
     private void loadAddAuthorView(ActionEvent event) {
-        loadWindow("/ui/addauthor.fxml", "Add New Author");
+        loadWindow("/ui/addauthor/addauthor.fxml", "Add New Author", this.getClass());
     }
 
     @FXML
     private void loadAddBookCopyView(ActionEvent event) {
-        loadWindow("/ui/addbookCopy.fxml", "Add New Book Copy");
+        loadWindow("/ui/addbookCopy.fxml", "Add New Book Copy", this.getClass());
     }
 
     @FXML
     private void loadMemberView(ActionEvent event) {
-        loadWindow("/ui/listmember/member_list.fxml", "Member List");
+        loadWindow("/ui/listmember/member_list.fxml", "Member List", this.getClass());
     }
 
     @FXML
     private void loadBookView(ActionEvent event) {
-        loadWindow("../ui/listbook/book_list.fxml", "Book List");
+        loadWindow("../ui/listbook/book_list.fxml", "Book List", this.getClass());
     }
 
     private void closeMainWindow() {
@@ -190,18 +190,21 @@ public class SystemController implements ControllerInterface{
         }
     }
 
-    public void loadWindow(String loc, String title) {
+    public static Scene loadWindow(String loc, String title, Class<?> clazz) {
+    	
+    	Scene scene = null;
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource(loc));
+            Parent parent = FXMLLoader.load(clazz.getResource(loc));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle(title);
-            Scene scene = new Scene(parent);
+            scene = new Scene(parent);
             stage.setScene(scene);
-            applyPermission(scene);
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(SystemController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return scene;
     }
     /////////////////////////////////////////////////////////////////
 
@@ -258,11 +261,6 @@ public class SystemController implements ControllerInterface{
             }
 
         }
-    }
-
-    @FXML
-    private void handleAddBookButton(ActionEvent event) {
-        loadAddBookView(event);
     }
 
     @FXML
@@ -399,11 +397,6 @@ public class SystemController implements ControllerInterface{
         AlertMaker.showSimpleAlert("Book checked in", "Book ISBN:" + checkInOutBookISBNS + ". Member ID:" + checkInOutMemIDS);
     }
     ///////////////////////////////////////////////////
-
-    @FXML
-    private void handleAddAuthorButton(ActionEvent event){
-    	loadAddAuthorWIndow();
-    }
     /*
     search records
      */
