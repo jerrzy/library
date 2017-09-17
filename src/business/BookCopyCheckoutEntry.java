@@ -42,4 +42,19 @@ public class BookCopyCheckoutEntry{
                 checkoutRecordEntry.getDueDate().toString();
     }
 
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(getCopyNum()).append("\t");
+
+        sb.append(getAvailable()).append("\t");
+        sb.append(getBorrowerId()).append("\t");
+        sb.append(getBorrowerName()).append("\t");
+        sb.append(getCheckoutDate()).append("\t");
+        sb.append(getDueDate()).append("\t");
+
+        return sb.toString();
+    }
+
 }

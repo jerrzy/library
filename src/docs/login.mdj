@@ -46,7 +46,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFedsVl2ncTtGA="
 							},
-							"name": "SequenceDiagram1",
+							"name": "login",
 							"visible": true,
 							"defaultDiagram": false,
 							"ownedViews": [
@@ -77,11 +77,11 @@
 											"containerExtending": false,
 											"left": 87,
 											"top": 21,
-											"width": 114,
+											"width": 28,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "SequenceDiagram1",
+											"text": "login",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
