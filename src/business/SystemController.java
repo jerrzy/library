@@ -251,6 +251,8 @@ public class SystemController implements ControllerInterface{
             } else if (currentAuth == Auth.LIBRARIAN) {
                 functionList.add("#addMemberButton");
                 functionList.add("#addBookCopyButton");
+                functionList.add("#addAuthorButton");
+                functionList.add("#addBookButton");
 
                 for (String function : functionList) {
                     Node node = scene.lookup(function);
@@ -431,22 +433,6 @@ public class SystemController implements ControllerInterface{
 
     private void logout() {
         currentAuth = null;
-    }
-
-    @Override
-    public List<String> allMemberIds() {
-        DataAccess da = DataAccessFactory.getInstance();
-        List<String> retval = new ArrayList<>();
-        retval.addAll(da.readMemberMap().keySet());
-        return retval;
-    }
-
-    @Override
-    public List<String> allBookIds() {
-        DataAccess da = DataAccessFactory.getInstance();
-        List<String> retval = new ArrayList<>();
-        retval.addAll(da.readBooksMap().keySet());
-        return retval;
     }
 
     @Override
