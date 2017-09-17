@@ -5,7 +5,9 @@ import business.Author;
 import dataaccess.DataAccessFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AddAuthorController {
 	
@@ -53,6 +55,14 @@ public class AddAuthorController {
         String authorId = DataAccessFactory.getInstance().getUniqueId();
         Author author = new Author(newAuthorFirstName, newAuthorLastName, telephone, address, credentials, bio, authorId);
         DataAccessFactory.getInstance().save(author);
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Add author");
+        alert.setContentText("Success");
+        alert.showAndWait();
+        
+        Stage stage = (Stage)addAuthorFirstName.getScene().getWindow();
+        stage.close();
     }
     
     @FXML
