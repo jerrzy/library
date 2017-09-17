@@ -100,7 +100,10 @@ public class TestData{
 
         List<Author> authors = new LinkedList<>();
         for (Map.Entry<String, Book> e : isbnBookMap.entrySet()) {
-            authors.addAll(e.getValue().getAuthors());
+            for (Author author : e.getValue().getAuthors()) {
+                author.setAuthorId(da.getUniqueId());
+                authors.add(author);
+            }
         }
 
         DataAccessFacade.loadAuthors(authors);

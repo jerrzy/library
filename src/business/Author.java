@@ -18,6 +18,9 @@ final public class Author extends Person implements Serializable {
 	public String getAuthorId() {
 		return authorId;
 	}
+	public void setAuthorId(String authorId) {
+		this.authorId = authorId;
+	}
 
 
 	
