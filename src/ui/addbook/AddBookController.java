@@ -10,8 +10,6 @@ import javafx.stage.Stage;
 
 public class AddBookController {
 	
-	private final SystemController systemController;
-	
     /**
      * add book UI
      */
@@ -23,16 +21,10 @@ public class AddBookController {
     private TextField newBookISBN;
     @FXML
     private TextField newBookAuthors;
-    
-    
-    public AddBookController(SystemController systemController) {
-		super();
-		this.systemController = systemController;
-	}
 
     @FXML
     private void handleAddAuthorButton(ActionEvent event){
-    	systemController.loadWindow("/ui/addauthor.fxml", "Add New Author");
+//    	systemController.loadWindow("/ui/addauthor.fxml", "Add New Author");
     }
     
     public void addAuthors(String authorName) {

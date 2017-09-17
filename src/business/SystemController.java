@@ -187,7 +187,6 @@ public class SystemController implements ControllerInterface{
     public void loadWindow(String loc, String title) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(loc));
-
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle(title);
             Scene scene = new Scene(parent);
