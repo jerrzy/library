@@ -1,13 +1,15 @@
 package ui.addauthor;
 
+import business.Address;
+import business.Author;
+import dataaccess.DataAccessFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import ui.addbook.AddBookController;
+import javafx.stage.Stage;
 
 public class AddAuthorController {
-	
-	private final AddBookController addBookController;
 	
 	 /**
      * add author UI
@@ -30,12 +32,6 @@ public class AddAuthorController {
     private TextField addAuthorState;
     @FXML
     private TextField addAuthorZip;
-    
-    
-    public AddAuthorController(AddBookController addBookController) {
-		super();
-		this.addBookController = addBookController;
-	}
 
 	/**
      * add an author to a book
@@ -45,21 +41,29 @@ public class AddAuthorController {
     private void confirmAddAuthor(ActionEvent event){
     	
     	String newAuthorFirstName = addAuthorFirstName.getText();
-    	String newAuthorLastName = addAuthorLastName.getText();
-    	
-    	addBookController.addAuthors(newAuthorFirstName + " " + newAuthorLastName);
+    	String newAuthorLastName = addAuthorLastName.getText();	
+    	String telephone = addAuthorTelephone.getText();
+        String credentials =  addAuthorCredentials.getText();
+        String bio = addAuthorBIO.getText();
+        String street = addAuthorStreet.getText();
+        String city = addAuthorCity.getText();
+        String state = addAuthorState.getText();
+        String zip = addAuthorZip.getText();
+        
+        Address address = new Address(street, city, state, zip);
+        
+        String authorId = DataAccessFactory.getInstance().getUniqueId();
+        Author author = new Author(newAuthorFirstName, newAuthorLastName, telephone, address, credentials, bio, authorId);
+        DataAccessFactory.getInstance().save(author);
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Add author");
+        alert.setContentText("Success");
+        alert.showAndWait();
+        
+        Stage stage = (Stage)addAuthorFirstName.getScene().getWindow();
+        stage.close();
     }
-    
-    /**
-     * retrieve an author
-     * @param event
-     */
-    @FXML
-    private void confirmRetrieveAuthor(ActionEvent event){
-    	
-    }
-    
-
     
     @FXML
     private void cancelAddAuthor(ActionEvent event){

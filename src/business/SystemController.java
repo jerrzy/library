@@ -144,6 +144,10 @@ public class SystemController implements ControllerInterface{
         loadWindow("/ui/login.fxml", "login");
     }
 
+    private void loadAddAuthorWIndow() {
+        loadWindow("/ui/addauthor/addauthor.fxml", "Add Author");
+    }
+    
     @FXML
     private void loadAddMemberView(ActionEvent event) {
         loadWindow("/ui/addmember.fxml", "Add New Member");
@@ -396,6 +400,10 @@ public class SystemController implements ControllerInterface{
     }
     ///////////////////////////////////////////////////
 
+    @FXML
+    private void handleAddAuthorButton(ActionEvent event){
+    	loadAddAuthorWIndow();
+    }
     /*
     search records
      */

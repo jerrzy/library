@@ -25,7 +25,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="mainRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="1320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.SystemController">
+<StackPane fx:id="mainRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="602.0" prefWidth="1320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.SystemController">
    <children>
       <BorderPane prefHeight="543.0" prefWidth="1279.0">
          <left>
@@ -33,6 +33,15 @@
                <children>
                   <Button id="addMemberButton" contentDisplay="TOP" onAction="#loadAddMemberView" prefHeight="150.0" prefWidth="154.0" text="Add Member">
                      <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/ui/icons/add_mem.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="addAuthorButton" mnemonicParsing="false" onAction="#handleAddAuthorButton" prefHeight="150.0" prefWidth="154.0" text="Add Author">
+                  <graphic>
                         <ImageView fitHeight="33.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@/ui/icons/add_mem.png" />
@@ -90,7 +99,7 @@
          <right>
             <VBox>
                <children>
-                  <VBox prefHeight="546.0" prefWidth="261.0" style="-fx-background-color: azure;" BorderPane.alignment="CENTER_RIGHT">
+                  <VBox prefHeight="606.0" prefWidth="261.0" style="-fx-background-color: azure;" BorderPane.alignment="CENTER_RIGHT">
                      <children>
                         <Label text="Book ISBN">
                            <VBox.margin>
