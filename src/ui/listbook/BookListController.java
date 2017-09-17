@@ -275,16 +275,16 @@ public class BookListController implements Initializable{
         }
 
         DataAccess da = DataAccessFactory.getInstance();
-        Book member = da.findBookByIsbn(isbn);
+        Book book = da.findBookByIsbn(isbn);
 
-        if (member == null) {
+        if (book == null) {
             Utils.alertError("Alert", "Book doesn't exist!");
             return;
         }
 
         ObservableList<Book> list = FXCollections.observableArrayList();
 
-        list.add(0, member);
+        list.add(0, book);
 
         bookTableView.getItems().clear();
         bookTableView.getItems().setAll(list);
